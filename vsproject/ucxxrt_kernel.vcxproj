@@ -139,6 +139,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="cthread.cpp" />
+    <ClCompile Include="syserror.cpp" />
+    <ClCompile Include="thread0.cpp" />
+    <ClCompile Include="xlock.cpp" />
+    <ClCompile Include="xmtx.cpp" />
+    <ClCompile Include="xnotify.cpp" />
+    <ClCompile Include="xtimec.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\inc\malloc.h" />
@@ -156,6 +163,7 @@
     <ClInclude Include="..\src\vcruntime\trnsctrl.h" />
     <ClInclude Include="..\src\vcruntime\vcruntime_internal.h" />
     <ClInclude Include="..\ucxxrt.h" />
+    <ClInclude Include="xmtx.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\i386\cruntime.inc">

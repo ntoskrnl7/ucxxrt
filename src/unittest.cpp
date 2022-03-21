@@ -15,6 +15,7 @@
 #include <unordered_map>
 #include <stdexcept>
 
+#include <thread>
 
 #ifdef _KERNEL_MODE
 #define LOG(_0, _1, ...) DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, __VA_ARGS__)
@@ -227,6 +228,14 @@ EXTERN_C int main()
     TEST(Test$ThrowUnknow);
     TEST(Test$HashMap);
     TEST(Test$InitializerList);
+
+    std::thread t([]() {
+
+    });
+    if (t.joinable())
+        t.join();
+
+    auto tid = std::this_thread::get_id();
 
     for (const auto& Test : TestVec)
     {

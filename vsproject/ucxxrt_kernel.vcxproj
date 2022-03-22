@@ -86,7 +86,15 @@
     <ClCompile Include="..\src\new_handler.cpp" />
     <ClCompile Include="..\src\new_mode.cpp" />
     <ClCompile Include="..\src\startup.cpp" />
+    <ClCompile Include="..\src\stl\xonce.cpp" />
     <ClCompile Include="..\src\stl\xthrow.cpp" />
+    <ClCompile Include="..\src\stl\cthread.cpp" />
+    <ClCompile Include="..\src\stl\syserror.cpp" />
+    <ClCompile Include="..\src\stl\thread0.cpp" />
+    <ClCompile Include="..\src\stl\xlock.cpp" />
+    <ClCompile Include="..\src\stl\xmtx.cpp" />
+    <ClCompile Include="..\src\stl\xnotify.cpp" />
+    <ClCompile Include="..\src\stl\xtime.cpp" />
     <ClCompile Include="..\src\sys_main.cpp" />
     <ClCompile Include="..\src\terminate.cpp" />
     <ClCompile Include="..\src\ucxxrt.cpp" />
@@ -139,17 +147,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="cthread.cpp" />
-    <ClCompile Include="syserror.cpp" />
-    <ClCompile Include="thread0.cpp" />
-    <ClCompile Include="xlock.cpp" />
-    <ClCompile Include="xmtx.cpp" />
-    <ClCompile Include="xnotify.cpp" />
-    <ClCompile Include="xtimec.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\inc\malloc.h" />
     <ClInclude Include="..\inc\new_user.h" />
+    <ClInclude Include="..\src\stl\awint.hpp" />
+    <ClInclude Include="..\src\stl\xmtx.hpp" />
     <ClInclude Include="..\src\vcruntime\ehassert.h" />
     <ClInclude Include="..\src\vcruntime\ehdata.h" />
     <ClInclude Include="..\src\vcruntime\ehdata4.h" />
@@ -163,7 +166,6 @@
     <ClInclude Include="..\src\vcruntime\trnsctrl.h" />
     <ClInclude Include="..\src\vcruntime\vcruntime_internal.h" />
     <ClInclude Include="..\ucxxrt.h" />
-    <ClInclude Include="xmtx.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\i386\cruntime.inc">

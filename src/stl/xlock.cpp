@@ -10,7 +10,7 @@
 
 #include "xmtx.hpp"
 
-
+#if _KERNEL_MODE
 _ACRTIMP void __cdecl _lock_locales(void)
 {
 }
@@ -18,6 +18,7 @@ _ACRTIMP void __cdecl _lock_locales(void)
 _ACRTIMP void __cdecl _unlock_locales(void)
 {
 }
+#endif
 
 _STD_BEGIN
 
@@ -138,10 +139,10 @@ void __cdecl _Lockit::_Lockit_dtor(int kind) noexcept { // unlock the mutex
 
 _EXTERN_C
 void _Lock_at_thread_exit_mutex() { // lock the at-thread-exit mutex
-    //_Mtxlock(&mtx[_LOCK_AT_THREAD_EXIT]);
+    _Mtxlock(&mtx[_LOCK_AT_THREAD_EXIT]);
 }
 void _Unlock_at_thread_exit_mutex() { // unlock the at-thread-exit mutex
-    //_Mtxunlock(&mtx[_LOCK_AT_THREAD_EXIT]);
+    _Mtxunlock(&mtx[_LOCK_AT_THREAD_EXIT]);
 }
 _END_EXTERN_C
 

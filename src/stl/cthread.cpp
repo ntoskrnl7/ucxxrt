@@ -11,11 +11,44 @@
 #include <xthreads.h>
 
 #if _KERNEL_MODE
-#else
-#include <Windows.h>
-#endif
+EXTERN_C
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwYieldExecution(
+    VOID
+    );
 
-EXTERN_C ULONG_PTR __GetCurrentThreadId();
+WINBASEAPI
+BOOL
+WINAPI
+SwitchToThread(
+    VOID
+    )
+{
+    return ZwYieldExecution() != STATUS_NO_YIELD_PERFORMED;
+}
+
+WINBASEAPI
+DWORD
+WINAPI
+GetCurrentThreadId(
+    VOID
+    )
+{
+    return (DWORD)HandleToULong(PsGetCurrentThreadId());
+}
+
+
+WINBASEAPI
+BOOL
+WINAPI
+CloseHandle(
+    _In_ HANDLE hObject
+    )
+{
+    return NT_SUCCESS(ZwClose(hObject));
+}
 
 EXTERN_C
 _When_(Timeout == NULL, _IRQL_requires_max_(APC_LEVEL))
@@ -28,7 +61,7 @@ ZwWaitForSingleObject(
     _In_ HANDLE Handle,
     _In_ BOOLEAN Alertable,
     _In_opt_ PLARGE_INTEGER Timeout
-);
+    );
 
 typedef enum _SYSTEM_INFORMATION_CLASS {
     SystemBasicInformation,
@@ -297,10 +330,10 @@ GetNativeSystemInfo(
 BOOL GetExitCodeThread(
     HANDLE  hThread,
     LPDWORD lpExitCode
-    )
+)
 {
     PETHREAD thread;
-    if (NT_SUCCESS(ObReferenceObjectByHandle(hThread, MAXIMUM_ALLOWED, NULL, KernelMode, (PVOID *)&thread, NULL))) {
+    if (NT_SUCCESS(ObReferenceObjectByHandle(hThread, MAXIMUM_ALLOWED, NULL, KernelMode, (PVOID*)&thread, NULL))) {
         *lpExitCode = (DWORD)PsGetThreadExitStatus(thread);
         return TRUE;
     }
@@ -405,6 +438,76 @@ Sleep(
         FALSE);
 }
 
+_Success_(return != 0)
+_ACRTIMP uintptr_t __cdecl _beginthreadex(
+    _In_opt_  void* _Security,
+    _In_      unsigned                 _StackSize,
+    _In_      _beginthreadex_proc_type _StartAddress,
+    _In_opt_  void* _ArgList,
+    _In_      unsigned                 _InitFlag,
+    _Out_opt_ unsigned* _ThrdAddr
+)
+{
+    _Security;
+
+    HANDLE handle = NULL;
+    struct context_t {
+        unsigned                 _StackSize;
+        _beginthreadex_proc_type _StartAddress;
+        void* _ArgList;
+        unsigned                 _InitFlag;
+    };
+
+    context_t* ctx = new context_t;
+    ctx->_StartAddress = _StartAddress;
+    ctx->_ArgList = _ArgList;
+    ctx->_StackSize = _StackSize;
+    ctx->_InitFlag = _InitFlag;
+
+    if (!NT_SUCCESS(PsCreateSystemThread(&handle, MAXIMUM_ALLOWED, NULL, NULL, NULL,
+        [](PVOID StartContext) {
+            context_t* ctx = (context_t*)StartContext;
+            if (ctx->_StackSize > MAXIMUM_EXPANSION_SIZE)
+                ctx->_StackSize = ctx->_StackSize;
+            if (ctx->_StackSize &&
+                NT_SUCCESS(KeExpandKernelStackAndCalloutEx(
+                    [](PVOID context) {
+                        context_t* ctx = (context_t*)context;
+                        ctx->_StartAddress(ctx->_ArgList);
+                        delete ctx;
+                    },
+                    ctx, ctx->_StackSize, TRUE, NULL))) {
+                // 
+            }
+            else {
+                ctx->_StartAddress(ctx->_ArgList);
+                delete ctx;
+            }
+        }, _ArgList))) {
+        return 0;
+    }
+
+    if (_ThrdAddr) {
+        PETHREAD thread;
+        if (NT_SUCCESS(ObReferenceObjectByHandle(handle, MAXIMUM_ALLOWED, NULL, KernelMode, (PVOID*)&thread, NULL))) {
+            *_ThrdAddr = PtrToInt(PsGetThreadId(thread));
+        }
+
+    }
+    return reinterpret_cast<uintptr_t>(handle);
+}
+
+_ACRTIMP void __cdecl _endthreadex(
+    _In_ unsigned _ReturnCode
+)
+{
+    PsTerminateSystemThread(_ReturnCode);
+}
+#else
+#include <Windows.h>
+
+#include "awint.hpp"
+#endif
 
 namespace {
     using _Thrd_start_t = int (*)(void*);
@@ -433,63 +536,6 @@ namespace {
 
 _EXTERN_C
 
-_Success_(return != 0)
-_ACRTIMP uintptr_t __cdecl _beginthreadex(
-    _In_opt_  void* _Security,
-    _In_      unsigned                 _StackSize,
-    _In_      _beginthreadex_proc_type _StartAddress,
-    _In_opt_  void* _ArgList,
-    _In_      unsigned                 _InitFlag,
-    _Out_opt_ unsigned* _ThrdAddr
-)
-{
-    _Security;
-
-    HANDLE handle;
-    struct context_t{
-        unsigned                 _StackSize;
-        _beginthreadex_proc_type _StartAddress;
-        void* _ArgList;
-        unsigned                 _InitFlag;
-    };
-
-    context_t* ctx = new context_t;
-    ctx->_StartAddress = _StartAddress;
-    ctx->_ArgList = _ArgList;
-    ctx->_StackSize = _StackSize;
-    ctx->_InitFlag = _InitFlag;
-
-    PsCreateSystemThread(&handle, MAXIMUM_ALLOWED, NULL, NULL, NULL, [](PVOID StartContext) {
-        context_t* ctx = (context_t*)StartContext;
-        if (ctx->_StackSize)        {
-            KeExpandKernelStackAndCallout([](PVOID context) {
-                context_t* ctx = (context_t*)context;
-                ctx->_StartAddress(ctx->_ArgList);
-                delete ctx;
-                }, ctx, ctx->_StackSize);
-        }
-        else {
-            ctx->_StartAddress(ctx->_ArgList);
-            delete ctx;
-        }
-    }, _ArgList);
-    if (_ThrdAddr) {
-        PETHREAD thread;
-        if (NT_SUCCESS(ObReferenceObjectByHandle(handle, MAXIMUM_ALLOWED, NULL, KernelMode, (PVOID*)&thread, NULL))) {
-            *_ThrdAddr = PtrToInt(PsGetThreadId(thread));
-        }
-        
-    }
-    return reinterpret_cast<uintptr_t>(handle);
-}
-
-_ACRTIMP void __cdecl _endthreadex(
-    _In_ unsigned _ReturnCode
-)
-{
-    PsTerminateSystemThread(_ReturnCode);
-}
-
 // TRANSITION, ABI: _Thrd_exit() is preserved for binary compatibility
 _CRTIMP2_PURE void _Thrd_exit(int res) { // terminate execution of calling thread
     _endthreadex(res);
@@ -511,19 +557,14 @@ int _Thrd_join(_Thrd_t thr, int* code) { // return exit code when thread termina
         *code = static_cast<int>(res);
     }
 
-    return _Thrd_detach(thr);
+    return CloseHandle(thr._Hnd) == 0 ? _Thrd_error : _Thrd_success;
 }
 
 int _Thrd_detach(_Thrd_t thr) { // tell OS to release thread's resources when it terminates
-#if _KERNEL_MODE
-    return ZwClose(thr._Hnd) == 0 ? _Thrd_error : _Thrd_success;
-#else
     return CloseHandle(thr._Hnd) == 0 ? _Thrd_error : _Thrd_success;
-#endif
 }
 
 void _Thrd_sleep(const xtime* xt) { // suspend thread until time xt
- 
     xtime now;
     xtime_get(&now, TIME_UTC);
     do { // sleep and check time
@@ -533,8 +574,7 @@ void _Thrd_sleep(const xtime* xt) { // suspend thread until time xt
 }
 
 void _Thrd_yield() { // surrender remainder of timeslice
-    YieldProcessor();
-    // SwitchToThread();
+    SwitchToThread();
 }
 
 // TRANSITION, ABI: _Thrd_equal() is preserved for binary compatibility
@@ -546,12 +586,12 @@ _CRTIMP2_PURE int _Thrd_equal(_Thrd_t thr0, _Thrd_t thr1) { // return 1 if thr0 
 _CRTIMP2_PURE _Thrd_t _Thrd_current() { // return _Thrd_t identifying current thread
     _Thrd_t result;
     result._Hnd = nullptr;
-    result._Id = _Thrd_id();
+    result._Id = GetCurrentThreadId();
     return result;
 }
 
 _Thrd_id_t _Thrd_id() { // return unique id for current thread
-    return (_Thrd_id_t)__GetCurrentThreadId();
+    return GetCurrentThreadId();
 }
 
 unsigned int _Thrd_hardware_concurrency() { // return number of processors

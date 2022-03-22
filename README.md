@@ -110,15 +110,16 @@ IDE：Visual Studio 2019 or higher
 ## 5. List of features that are not supported at this time
 
 - [ ] Thread Local Storage (TLS): thread_local、TlsAlloc ...
-- [ ] std::thread
+- [x] std::thread
 - [ ] std::filesystem
-- [ ] std::chrono
+- [x] std::chrono
 - [ ] std::stacktrace_entry
 - [ ] std::locale
 - [ ] std::stream (std::fstream、std::iostream、std::cin、std::cout、std::cerr)
-- [ ] std::mutex、std::shared_mutex
+- [x] std::mutex
+- [ ] std::shared_mutex
 - [ ] std::future
-- [ ] std::condition_variable
+- [x] std::condition_variable
 - [ ] std::latch
 - [ ] std::semaphore (std::counting_semaphore、std::binary_semaphore)
 - [ ] ...

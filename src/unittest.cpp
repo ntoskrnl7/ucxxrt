@@ -15,7 +15,6 @@
 #include <unordered_map>
 #include <stdexcept>
 
-
 #ifdef _KERNEL_MODE
 #define LOG(_0, _1, ...) DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, __VA_ARGS__)
 #else
@@ -214,6 +213,28 @@ std::unordered_map<std::string, ULONG_PTR> Test$StaticObjectInitializer =
     { "5", 5 },
 };
 
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <chrono>
+
+void Test$Thread() {
+    std::mutex mtx;
+    std::condition_variable cv;
+    std::thread t([&mtx, &cv]() {
+        cv.notify_all();
+        std::unique_lock<std::mutex> lk(mtx);
+        });
+    {
+        std::unique_lock<std::mutex> lk(mtx);
+        cv.wait(lk);
+    }
+    if (t.joinable())
+        t.join();
+
+    auto tid = std::this_thread::get_id();
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+}
 
 #ifdef _KERNEL_MODE
 EXTERN_C NTSTATUS DriverMain(PDRIVER_OBJECT aDriverObject, PUNICODE_STRING /*aRegistry*/)
@@ -227,6 +248,7 @@ EXTERN_C int main()
     TEST(Test$ThrowUnknow);
     TEST(Test$HashMap);
     TEST(Test$InitializerList);
+    TEST(Test$Thread);
 
     for (const auto& Test : TestVec)
     {

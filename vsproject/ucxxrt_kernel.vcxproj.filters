@@ -175,6 +175,30 @@
     <ClCompile Include="..\src\i386\ehprolg3a.cpp">
       <Filter>ucxxrt\i386</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\stl\cthread.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\thread0.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\xlock.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\xmtx.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\syserror.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\xnotify.cpp">
+      <Filter>ucxxrt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\xonce.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\xtime.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ucxxrt.h" />
@@ -219,6 +243,12 @@
     </ClInclude>
     <ClInclude Include="..\inc\new_user.h">
       <Filter>ucxxrt\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stl\xmtx.hpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stl\awint.hpp">
+      <Filter>ucxxrt\stl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

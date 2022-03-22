@@ -6,7 +6,7 @@
 ![Windows](https://img.shields.io/badge/Windows-7+-orange.svg)
 ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2019-purple.svg)
 
-* [简体中文](ReadMe.zh-cn.md)
+* [简体中文](./docs/zh-cn.md), [한국어](./docs/ko-kr.md)
 
 ## 1. About
 
@@ -25,11 +25,27 @@ But there are several problems，like it isn't support C++ exception and it cost
 ### 1.2 Features
 
 Kernel-mode：
-- [x] support new/delete operators.  
-- [x] support C++ exception (/EHsc).  
-- [x] support SAFESEH、GS (Buffer Security Check).  
-- [x] support STL (not fully).  
-- [x] support static objects.  
+
+* [x] support new/delete operators.
+* [x] support C++ exception (/EHsc).  
+* [x] support SAFESEH、GS (Buffer Security Check).  
+* [x] support STL (not fully).  
+  * [ ] Thread Local Storage (TLS): thread_local、TlsAlloc ...
+  * [x] std::thread
+  * [ ] std::filesystem
+  * [x] std::chrono
+  * [ ] std::stacktrace_entry
+  * [ ] std::locale
+  * [ ] std::stream (std::fstream、std::iostream、std::cin、std::cout、std::cerr)
+  * [x] std::mutex
+  * [ ] std::shared_mutex
+  * [ ] std::future
+  * [x] std::condition_variable
+  * [ ] std::latch
+  * [ ] std::semaphore (std::counting_semaphore、std::binary_semaphore)
+  * [ ] ...
+
+* [x] support static objects.  
 
 [List of features that are not supported at this time↓](#5-List-of-features-that-are-not-supported-at-this-time)
 
@@ -81,6 +97,24 @@ void Test$HashMap()
             "map[%ld] = %s\n", Item.first, Item.second.c_str());
     }
 }
+
+void Test$Thread() {
+    std::mutex mtx;
+    std::condition_variable cv;
+    std::thread t([&mtx, &cv]() {
+        cv.notify_all();
+        std::unique_lock<std::mutex> lk(mtx);
+        });
+    {
+        std::unique_lock<std::mutex> lk(mtx);
+        cv.wait(lk);
+    }
+    if (t.joinable())
+        t.join();
+
+    auto tid = std::this_thread::get_id();
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+}
 ```
 
 ## 2. Compile
@@ -106,19 +140,3 @@ IDE：Visual Studio 2019 or higher
 * [RetrievAL](https://github.com/SpoilerScriptsGroup/RetrievAL)
 
 > Thanks to these excellent projects for help me on developing ucxxrt.
-
-## 5. List of features that are not supported at this time
-
-- [ ] Thread Local Storage (TLS): thread_local、TlsAlloc ...
-- [ ] std::thread
-- [ ] std::filesystem
-- [ ] std::chrono
-- [ ] std::stacktrace_entry
-- [ ] std::locale
-- [ ] std::stream (std::fstream、std::iostream、std::cin、std::cout、std::cerr)
-- [ ] std::mutex、std::shared_mutex
-- [ ] std::future
-- [ ] std::condition_variable
-- [ ] std::latch
-- [ ] std::semaphore (std::counting_semaphore、std::binary_semaphore)
-- [ ] ...

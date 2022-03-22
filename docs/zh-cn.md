@@ -21,11 +21,27 @@ ucxxrt 是一个基于微软的 MSVC 修改的开源运行时库，最大的亮�
 ### 1.2 特性
 
 内核模式：
-- [x] 支持 new/delete
-- [x] 支持 C++ 异常 (/EHsc)
-- [x] 支持 SAFESEH、GS (Buffer Security Check)
-- [x] 支持 STL (部分)
-- [x] 支持 静态对象
+
+* [x] 支持 new/delete
+* [x] 支持 C++ 异常 (/EHsc)
+* [x] 支持 SAFESEH、GS (Buffer Security Check)
+* [x] 支持 STL (部分)
+  * [ ] Thread Local Storage (TLS): thread_local、TlsAlloc ...
+  * [x] std::thread
+  * [ ] std::filesystem
+  * [x] std::chrono
+  * [ ] std::stacktrace_entry
+  * [ ] std::locale
+  * [ ] std::stream (std::fstream、std::iostream、std::cin、std::cout、std::cerr)
+  * [x] std::mutex
+  * [ ] std::shared_mutex
+  * [ ] std::future
+  * [x] std::condition_variable
+  * [ ] std::latch
+  * [ ] std::semaphore (std::counting_semaphore、std::binary_semaphore)
+  * [ ] ...
+
+* [x] 支持 静态对象
 
 [暂不支持的特性列表↓](#5-暂不支持的特性列表)
 
@@ -93,7 +109,7 @@ IDE：Visual Studio 2019 或更高版本
 
 > !! 内核模式：`DriverEntry` 改为 `DriverMain`
 
-![使用方法](./readme/use.zh-cn.gif)
+![使用方法](../readme/use.zh-cn.gif)
 
 ## 4. 引用参考和感谢
 
@@ -102,19 +118,3 @@ IDE：Visual Studio 2019 或更高版本
 * [RetrievAL](https://github.com/SpoilerScriptsGroup/RetrievAL)
 
 > 非常感谢这些优秀的项目，没有它们的存在，就不会有 ucxxrt。
-
-## 5. 暂不支持的特性列表
-
-- [ ] Thread Local Storage (TLS): thread_local、TlsAlloc ...
-- [ ] std::thread
-- [ ] std::filesystem
-- [ ] std::chrono
-- [ ] std::stacktrace_entry
-- [ ] std::locale
-- [ ] std::stream (std::fstream、std::iostream、std::cin、std::cout、std::cerr)
-- [ ] std::mutex、std::shared_mutex
-- [ ] std::future
-- [ ] std::condition_variable
-- [ ] std::latch
-- [ ] std::semaphore (std::counting_semaphore、std::binary_semaphore)
-- [ ] ...

@@ -33,10 +33,10 @@ ucxxrt 是一个基于微软的 MSVC 修改的开源运行时库，最大的亮�
   * [ ] std::stacktrace_entry
   * [ ] std::locale
   * [ ] std::stream (std::fstream、std::iostream、std::cin、std::cout、std::cerr)
-  * [x] std::mutex
+  * [ ] std::mutex
   * [ ] std::shared_mutex
   * [ ] std::future
-  * [x] std::condition_variable
+  * [ ] std::condition_variable
   * [ ] std::latch
   * [ ] std::semaphore (std::counting_semaphore、std::binary_semaphore)
   * [ ] ...

@@ -33,10 +33,10 @@ ucxxrt가 탄생하기 전에는 드라이버에서 C++를 사용하여 온디�
   * [ ] std::stacktrace_entry
   * [ ] std::locale
   * [ ] std::stream (std::fstream、std::iostream、std::cin、std::cout、std::cerr)
-  * [x] std::mutex
+  * [ ] std::mutex
   * [ ] std::shared_mutex
   * [ ] std::future
-  * [x] std::condition_variable
+  * [ ] std::condition_variable
   * [ ] std::latch
   * [ ] std::semaphore (std::counting_semaphore、std::binary_semaphore)
   * [ ] ...

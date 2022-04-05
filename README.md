@@ -37,10 +37,10 @@ Kernel-mode：
   * [ ] std::stacktrace_entry
   * [ ] std::locale
   * [ ] std::stream (std::fstream、std::iostream、std::cin、std::cout、std::cerr)
-  * [x] std::mutex
+  * [ ] std::mutex
   * [ ] std::shared_mutex
   * [ ] std::future
-  * [x] std::condition_variable
+  * [ ] std::condition_variable
   * [ ] std::latch
   * [ ] std::semaphore (std::counting_semaphore、std::binary_semaphore)
   * [ ] ...

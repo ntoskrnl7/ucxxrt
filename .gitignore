@@ -10,16 +10,9 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-bld/
-[Bb]in/
-[Oo]bj/
-[Bb]in/
-[Ll]ib/
+/lib/
+/ucxxrt/lib/
+/bin/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -242,23 +235,23 @@ FakesAssemblies/
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
 
-# Paket dependency manager
+Paket dependency manager
 .paket/paket.exe
 paket-files/
 
-# FAKE - F# Make
+FAKE - F# Make
 .fake/
 
-# JetBrains Rider
+JetBrains Rider
 .idea/
 *.sln.iml
 
-# CodeRush
+CodeRush
 .cr/
 
-# Python Tools for Visual Studio (PTVS)
+Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
 
-# VSCode
+VSCode
 .vscode/

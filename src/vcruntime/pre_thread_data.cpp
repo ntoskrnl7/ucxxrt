@@ -30,18 +30,9 @@ struct __vcrt_ptd_ext : public RENAME_BASE_PTD(__vcrt_ptd)
 
 static __vcrt_ptd_ext __vcrt_ptd_data[0x4000];
 
-ULONG_PTR __GetCurrentThreadId()
-{
-#ifdef _KERNEL_MODE
-    return (ULONG_PTR)PsGetCurrentThreadId();
-#else
-    return (ULONG_PTR)GetCurrentThreadId();
-#endif
-}
-
 RENAME_BASE_PTD(__vcrt_ptd)* __cdecl RENAME_UCXXRT(RENAME_BASE_PTD(__vcrt_getptd))()
 {
-    auto ptd = &__vcrt_ptd_data[(__GetCurrentThreadId() >> 1) % _countof(__vcrt_ptd_data)];
+    auto ptd = &__vcrt_ptd_data[(GetCurrentThreadId() >> 1) % _countof(__vcrt_ptd_data)];
     if (_InterlockedCompareExchange8((volatile char*)&ptd->_init, true, false) == false)
     {
 #if defined _M_X64 || defined _M_ARM || defined _M_ARM64 || defined _M_HYBRID

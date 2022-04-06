@@ -6,25 +6,7 @@
 #include <cstdlib>
 #include <xthreads.h>
 
-_CRTIMP2_PURE int __cdecl _Mtx_init(_Mtx_t*, int) { return _Thrd_success; }
-_CRTIMP2_PURE void __cdecl _Mtx_destroy(_Mtx_t) {}
-_CRTIMP2_PURE void __cdecl _Mtx_init_in_situ(_Mtx_t, int) {}
-_CRTIMP2_PURE void __cdecl _Mtx_destroy_in_situ(_Mtx_t) {}
-_CRTIMP2_PURE int __cdecl _Mtx_current_owns(_Mtx_t) { return _Thrd_success; }
-_CRTIMP2_PURE int __cdecl _Mtx_lock(_Mtx_t) { return _Thrd_success; }
-_CRTIMP2_PURE int __cdecl _Mtx_trylock(_Mtx_t) { return _Thrd_success; }
-_CRTIMP2_PURE int __cdecl _Mtx_timedlock(_Mtx_t, const xtime*) { return _Thrd_success; }
-_CRTIMP2_PURE int __cdecl _Mtx_unlock(_Mtx_t) { return _Thrd_success; }
-
-
-_CRTIMP2_PURE int __cdecl _Cnd_init(_Cnd_t*) { return _Thrd_success; }
-_CRTIMP2_PURE void __cdecl _Cnd_destroy(_Cnd_t) {}
-_CRTIMP2_PURE void __cdecl _Cnd_init_in_situ(_Cnd_t) {}
-_CRTIMP2_PURE void __cdecl _Cnd_destroy_in_situ(_Cnd_t) {}
-_CRTIMP2_PURE int __cdecl _Cnd_wait(_Cnd_t, _Mtx_t) { return _Thrd_success; }
-_CRTIMP2_PURE int __cdecl _Cnd_timedwait(_Cnd_t, _Mtx_t, const xtime*) { return _Thrd_success; }
-_CRTIMP2_PURE int __cdecl _Cnd_broadcast(_Cnd_t) { return _Thrd_success; }
-_CRTIMP2_PURE int __cdecl _Cnd_signal(_Cnd_t) { return _Thrd_success;  }
+// #include <Windows.h>
 
 constexpr int _Nitems = 20;
 
@@ -50,8 +32,6 @@ _EXTERN_C
 void _Lock_at_thread_exit_mutex();
 void _Unlock_at_thread_exit_mutex();
 
-ULONG_PTR __GetCurrentThreadId();
-
 void _Cnd_register_at_thread_exit(
     _Cnd_t cnd, _Mtx_t mtx, int* p) { // register condition variable and mutex for cleanup at thread exit
     // find block with available space
@@ -69,7 +49,7 @@ void _Cnd_register_at_thread_exit(
         else { // found block with available space
             for (int i = 0; i < _Nitems; ++i) { // find empty slot
                 if (block->data[i].mtx == nullptr) { // store into empty slot
-                    block->data[i].id._Id = (_Thrd_id_t)__GetCurrentThreadId();
+                    block->data[i].id._Id = GetCurrentThreadId();
                     block->data[i].mtx = mtx;
                     block->data[i].cnd = cnd;
                     block->data[i].res = p;

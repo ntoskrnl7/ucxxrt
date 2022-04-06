@@ -6,38 +6,6 @@
 #include <mutex>
 
 
-
-//
-// Define one-time initialization primitive
-//
-
-typedef RTL_RUN_ONCE INIT_ONCE;
-typedef PRTL_RUN_ONCE PINIT_ONCE;
-typedef PRTL_RUN_ONCE LPINIT_ONCE;
-
-#define INIT_ONCE_STATIC_INIT   RTL_RUN_ONCE_INIT
-
-typedef
-BOOL
-(WINAPI* PINIT_ONCE_FN) (
-    _Inout_ PINIT_ONCE InitOnce,
-    _Inout_opt_ PVOID Parameter,
-    _Outptr_opt_result_maybenull_ PVOID* Context
-    );
-
-WINBASEAPI
-BOOL
-WINAPI
-InitOnceExecuteOnce(
-    _Inout_ PINIT_ONCE InitOnce,
-    _In_ __callback PINIT_ONCE_FN InitFn,
-    _Inout_opt_ PVOID Parameter,
-    _Outptr_opt_result_maybenull_ LPVOID* Context
-)
-{
-    return NT_SUCCESS(RtlRunOnceExecuteOnce(InitOnce, (PRTL_RUN_ONCE_INIT_FN)InitFn, Parameter, Context));
-}
-
 namespace {
     struct _Xfg_trampoline_parameter {
         void* _Pv;

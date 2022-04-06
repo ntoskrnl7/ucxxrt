@@ -7,45 +7,21 @@
 #include <xtimec.h>
 
 #if _KERNEL_MODE
+#include <Ldk/windows.h>
+
+#if _STL_WIN32_WINNT >= _WIN32_WINNT_WIN8
+
 #define __crtGetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime) \
     GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime)
 
-WINBASEAPI
-VOID
-WINAPI
-GetSystemTimePreciseAsFileTime(
-    _Out_ LPFILETIME lpSystemTimeAsFileTime
-    )
-{
-    LARGE_INTEGER SystemTime;
-    KeQuerySystemTimePrecise(&SystemTime);
-    lpSystemTimeAsFileTime->dwLowDateTime = SystemTime.LowPart;
-    lpSystemTimeAsFileTime->dwHighDateTime = SystemTime.HighPart;
+#else // _STL_WIN32_WINNT >= _WIN32_WINNT_WIN8
+
+_CRTIMP2 void __cdecl __crtGetSystemTimePreciseAsFileTime(_Out_ LPFILETIME lpSystemTimeAsFileTime) {
+    GetSystemTimeAsFileTime(lpSystemTimeAsFileTime);
 }
 
-WINBASEAPI
-BOOL
-WINAPI
-QueryPerformanceCounter(
-    _Out_ LARGE_INTEGER* lpPerformanceCount
-    )
-{
-    LARGE_INTEGER PerformanceFrequency;
-    *lpPerformanceCount = KeQueryPerformanceCounter(&PerformanceFrequency);
-    return TRUE;
-}
+#endif // _STL_WIN32_WINNT >= _WIN32_WINNT_WIN8
 
-WINBASEAPI
-BOOL
-WINAPI
-QueryPerformanceFrequency(
-    _Out_ LARGE_INTEGER* lpFrequency
-    )
-{
-    LARGE_INTEGER PerformanceFrequency;
-    *lpFrequency = KeQueryPerformanceCounter(&PerformanceFrequency);
-    return TRUE;
-}
 #else
 #include "awint.hpp"
 #endif

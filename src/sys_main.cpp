@@ -12,6 +12,7 @@
 
 #include <corecrt_startup.h>
 #include <vcruntime_internal.h>
+#include <Ldk/ldk.h>
 
 #ifdef _KERNEL_MODE
 
@@ -55,11 +56,18 @@ static VOID DriverUnload(PDRIVER_OBJECT DriverObject)
 
     // do terminations
     _initterm(__xt_a, __xt_z);
+
+    LdkTerminate();
 }
 
 NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING Registry)
 {
     long main_result = STATUS_UNSUCCESSFUL;
+
+    main_result = LdkInitialize(DriverObject, Registry, 0);
+    if (!NT_SUCCESS(main_result)) {
+        return main_result;
+    }
 
     // do feature initializions
     __isa_available_init();
@@ -79,6 +87,7 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING Registry)
 
         // do C++ initializions
         _initterm(__xc_a, __xc_z);
+
 
         //
         // Initialization is complete; invoke main...

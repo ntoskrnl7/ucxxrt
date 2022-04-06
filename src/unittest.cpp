@@ -219,21 +219,30 @@ std::unordered_map<std::string, ULONG_PTR> Test$StaticObjectInitializer =
 #include <chrono>
 
 void Test$Thread() {
+    using namespace std::chrono_literals;
+
     std::mutex mtx;
     std::condition_variable cv;
-    std::thread t([&mtx, &cv]() {
+
+    bool ready = false;
+    std::thread t([&cv, &ready]() {
+        std::this_thread::sleep_for(3s);
+        ready = true;
         cv.notify_all();
-        std::unique_lock<std::mutex> lk(mtx);
+        std::this_thread::sleep_for(3s);
         });
+
     {
         std::unique_lock<std::mutex> lk(mtx);
-        cv.wait(lk);
+        cv.wait(lk, [&ready] { return ready; });
     }
+
     if (t.joinable())
         t.join();
 
-    auto tid = std::this_thread::get_id();
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    ASSERT(t.get_id() != std::this_thread::get_id());
+
+    std::this_thread::sleep_for(3s);
 }
 
 #ifdef _KERNEL_MODE
@@ -242,6 +251,8 @@ EXTERN_C NTSTATUS DriverMain(PDRIVER_OBJECT aDriverObject, PUNICODE_STRING /*aRe
 EXTERN_C int main()
 #endif
 {
+    KdBreakPoint();
+
     TEST(Test$Float2Int);
     TEST(Test$ThrowInt);
     TEST(Test$ThrowObject);

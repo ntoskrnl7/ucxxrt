@@ -40,7 +40,6 @@ ucxxrt 是一个基于微软的 MSVC 修改的开源运行时库，最大的亮�
   * [ ] std::latch
   * [ ] std::semaphore (std::counting_semaphore、std::binary_semaphore)
   * [ ] ...
-
 * [x] 支持 静态对象
 
 [暂不支持的特性列表↓](#5-暂不支持的特性列表)

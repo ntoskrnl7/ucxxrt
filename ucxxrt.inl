@@ -64,8 +64,7 @@
 #   ifndef  NTOS_KERNEL_RUNTIME
 #       define NTOS_KERNEL_RUNTIME __KERNEL_MODE
 #   endif
-#   include <ntddk.h>
-#   include <wdm.h>
+#	include <Ldk/windows.h>
 #   include <ntimage.h>
 #else
 #   include <Windows.h>

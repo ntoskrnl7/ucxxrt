@@ -37,14 +37,13 @@ Kernel-mode：
   * [ ] std::stacktrace_entry
   * [ ] std::locale
   * [ ] std::stream (std::fstream、std::iostream、std::cin、std::cout、std::cerr)
-  * [ ] std::mutex
+  * [x] std::mutex
   * [ ] std::shared_mutex
   * [ ] std::future
-  * [ ] std::condition_variable
+  * [x] std::condition_variable
   * [ ] std::latch
   * [ ] std::semaphore (std::counting_semaphore、std::binary_semaphore)
   * [ ] ...
-
 * [x] support static objects.  
 
 [List of features that are not supported at this time↓](#5-List-of-features-that-are-not-supported-at-this-time)

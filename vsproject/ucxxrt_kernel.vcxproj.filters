@@ -190,13 +190,19 @@
     <ClCompile Include="..\src\stl\syserror.cpp">
       <Filter>ucxxrt\stl</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\stl\xnotify.cpp">
-      <Filter>ucxxrt</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\stl\xonce.cpp">
       <Filter>ucxxrt\stl</Filter>
     </ClCompile>
     <ClCompile Include="..\src\stl\xtime.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\xnotify.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\mutex.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\cond.cpp">
       <Filter>ucxxrt\stl</Filter>
     </ClCompile>
   </ItemGroup>
@@ -248,6 +254,9 @@
       <Filter>ucxxrt\stl</Filter>
     </ClInclude>
     <ClInclude Include="..\src\stl\awint.hpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\stl\primitives.hpp">
       <Filter>ucxxrt\stl</Filter>
     </ClInclude>
   </ItemGroup>

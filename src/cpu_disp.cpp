@@ -134,15 +134,6 @@ unsigned int __isa_available = __ISA_AVAILABLE_X86;
 unsigned int __isa_enabled   = __ISA_ENABLED_X86;
 unsigned int __favor         = 0;
 
-BOOLEAN __stdcall __IsProcessorFeaturePresent(_In_ ULONG ProcessorFeature)
-{
-#ifdef _KERNEL_MODE
-    return (BOOLEAN)ExIsProcessorFeaturePresent(ProcessorFeature);
-#else
-    return (BOOLEAN)IsProcessorFeaturePresent(ProcessorFeature);
-#endif
-}
-
 #ifndef _M_IX86
 #pragma intrinsic(__cpuid)
 #pragma intrinsic(__cpuidex)
@@ -167,7 +158,7 @@ void __cdecl __isa_available_init()
 	uint32_t intel_outside;
 
 	__favor = 0;
-	if (!__IsProcessorFeaturePresent(PF_XMMI64_INSTRUCTIONS_AVAILABLE))
+	if (!IsProcessorFeaturePresent(PF_XMMI64_INSTRUCTIONS_AVAILABLE))
 		goto ISA_AVAILABLE_X86;
 	__cpuid((int *)&cpuInfo, 0);
 	cpuid_0_eax = cpuInfo.eax;
@@ -257,7 +248,7 @@ __declspec(naked) void __cdecl __isa_available_init()
 
 		mov     dword ptr [__favor], 0
 		push    PF_XMMI64_INSTRUCTIONS_AVAILABLE
-		call    __IsProcessorFeaturePresent
+		call    IsProcessorFeaturePresent
 		test    eax, eax
 		jz      ISA_AVAILABLE_X86
 		push    ebx

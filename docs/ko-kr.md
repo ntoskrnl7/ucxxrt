@@ -114,7 +114,7 @@ void Test$Thread() {
 
 IDE：Visual Studio 2019 이상
 
-* `git clone https://github.com/MiroKaku/ucxxrt.git`
+* `git clone --recursive https://github.com/ntoskrnl7/ucxxrt.git`
 * `ucxxrt.sln`을 열어 빌드
 
 ## 3. 사용방법

@@ -120,7 +120,7 @@ void Test$Thread() {
 
 IDE：Visual Studio 2019 or higher
 
-* `git clone https://github.com/MiroKaku/ucxxrt.git`
+* `git clone --recursive https://github.com/ntoskrnl7/ucxxrt.git`
 * Open `ucxxrt.sln` and compile
 
 ## 3. How to use

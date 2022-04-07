@@ -98,7 +98,7 @@ void Test$HashMap()
 
 IDE：Visual Studio 2019 或更高版本
 
-* `git clone https://github.com/MiroKaku/ucxxrt.git`
+* `git clone --recursive https://github.com/ntoskrnl7/ucxxrt.git`
 * 打开 `ucxxrt.sln` 进行编译
 
 ## 3. 怎样使用

@@ -130,7 +130,16 @@
     </ClCompile>
     <ClCompile Include="..\src\stl\syserror.cpp" />
     <ClCompile Include="..\src\stl\thread0.cpp" />
-    <ClCompile Include="..\src\stl\xlock.cpp" />
+    <ClCompile Include="..\src\stl\xlock.cpp">
+      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Cdecl</CallingConvention>
+      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Cdecl</CallingConvention>
+      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Cdecl</CallingConvention>
+      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Cdecl</CallingConvention>
+      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Cdecl</CallingConvention>
+      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Cdecl</CallingConvention>
+      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Cdecl</CallingConvention>
+      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Cdecl</CallingConvention>
+    </ClCompile>
     <ClCompile Include="..\src\stl\xmtx.cpp" />
     <ClCompile Include="..\src\stl\xtime.cpp">
       <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Cdecl</CallingConvention>
@@ -163,6 +172,7 @@
     <ClCompile Include="..\src\vcruntime\std_nothrow.cpp" />
     <ClCompile Include="..\src\vcruntime\std_type_info.cpp" />
     <ClCompile Include="..\src\vcruntime\std_type_info_static.cpp" />
+    <ClCompile Include="..\src\vcruntime\thread.cpp" />
     <ClCompile Include="..\src\vcruntime\throw.cpp" />
     <ClCompile Include="..\src\vcruntime\throw_bad_alloc.cpp" />
     <ClCompile Include="..\src\vcruntime\uncaught_exception.cpp" />
@@ -432,7 +442,7 @@
     </ClCompile>
     <Lib>
       <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(Configuration)\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -442,7 +452,7 @@
     </ClCompile>
     <Lib>
       <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(Configuration)\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -451,7 +461,7 @@
     <Lib />
     <Lib>
       <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(Configuration)\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\deps\ldk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -463,7 +473,7 @@
     <Lib />
     <Lib>
       <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(Configuration)\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\deps\ldk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -475,7 +485,7 @@
     </ClCompile>
     <Lib>
       <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(Configuration)\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -484,7 +494,7 @@
     </ClCompile>
     <Lib>
       <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(Configuration)\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
@@ -493,7 +503,7 @@
     </ClCompile>
     <Lib>
       <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(Configuration)\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -502,7 +512,7 @@
     </ClCompile>
     <Lib>
       <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(Configuration)\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

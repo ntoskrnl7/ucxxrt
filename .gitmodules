@@ -1,0 +1,3 @@
+[submodule "deps/ldk"]
+	path = deps/ldk
+	url = https://github.com/ntoskrnl7/ldk

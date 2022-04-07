@@ -156,6 +156,7 @@
     <ClCompile Include="..\src\terminate.cpp" />
     <ClCompile Include="..\src\ucxxrt.cpp" />
     <ClCompile Include="..\src\vcruntime\delete.cpp" />
+    <ClCompile Include="..\src\vcruntime\dyn_tls_init.cpp" />
     <ClCompile Include="..\src\vcruntime\ehhelpers.cpp" />
     <ClCompile Include="..\src\vcruntime\ehstate.cpp" />
     <ClCompile Include="..\src\vcruntime\ehvccctr.cpp" />
@@ -176,6 +177,9 @@
     <ClCompile Include="..\src\vcruntime\thread.cpp" />
     <ClCompile Include="..\src\vcruntime\throw.cpp" />
     <ClCompile Include="..\src\vcruntime\throw_bad_alloc.cpp" />
+    <ClCompile Include="..\src\vcruntime\tlsdtor.cpp" />
+    <ClCompile Include="..\src\vcruntime\tlsdyn.cpp" />
+    <ClCompile Include="..\src\vcruntime\tlssup.cpp" />
     <ClCompile Include="..\src\vcruntime\uncaught_exception.cpp" />
     <ClCompile Include="..\src\vcruntime\uncaught_exceptions.cpp" />
     <ClCompile Include="..\src\vcruntime\unexpected.cpp" />

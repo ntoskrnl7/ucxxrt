@@ -211,6 +211,18 @@
     <ClCompile Include="..\src\stl\sharedmutex.cpp">
       <Filter>ucxxrt\stl</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\vcruntime\tlsdyn.cpp">
+      <Filter>ucxxrt\vcruntime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\vcruntime\tlsdtor.cpp">
+      <Filter>ucxxrt\vcruntime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\vcruntime\tlssup.cpp">
+      <Filter>ucxxrt\vcruntime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\vcruntime\dyn_tls_init.cpp">
+      <Filter>ucxxrt\vcruntime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ucxxrt.h" />

@@ -386,7 +386,7 @@ void Test$SharedMutex() {
     auto increment_and_print = [&counter]() {
         for (int i = 0; i < 3; i++) {
             LOG(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL,
-                "%p %s\n", std::this_thread::get_id(), counter.increment());
+                "%p %d\n", std::this_thread::get_id(), counter.increment());
 
             // Note: Writing to std::cout actually needs to be synchronized as well
             // by another std::mutex. This has been omitted to keep the example small.

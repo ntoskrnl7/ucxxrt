@@ -38,7 +38,7 @@ Kernel-mode：
   * [ ] std::locale
   * [ ] std::stream (std::fstream、std::iostream、std::cin、std::cout、std::cerr)
   * [x] std::mutex
-  * [ ] std::shared_mutex
+  * [x] std::shared_mutex
   * [ ] std::future
   * [x] std::condition_variable
   * [ ] std::latch

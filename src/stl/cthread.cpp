@@ -8,7 +8,11 @@
 #include <cstdlib>
 #include <cstring>
 #include <process.h>
+#if _MSC_VER > 1916
 #include <xthreads.h>
+#else
+#include <thr/xthread>
+#endif
 
 #if _KERNEL_MODE
 #include <Ldk/windows.h>

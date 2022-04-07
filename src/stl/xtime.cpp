@@ -4,7 +4,12 @@
 // xtime functions
 
 #include <atomic>
+
+#if _MSC_VER > 1916
 #include <xtimec.h>
+#else
+#include <thr/xtimec.h>
+#endif
 
 #if _KERNEL_MODE
 #include <Ldk/windows.h>

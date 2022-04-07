@@ -6,8 +6,14 @@
 #include <cstdlib>
 #include <internal_shared.h>
 #include <type_traits>
+
+#if _MSC_VER > 1916
 #include <xthreads.h>
 #include <xtimec.h>
+#else
+#include <thr/xthreads.h>
+#include <thr/xtime>
+#endif
 
 #include "primitives.hpp"
 

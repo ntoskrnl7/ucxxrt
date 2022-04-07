@@ -6,6 +6,18 @@
 #define _XMTX
 #include <yvals.h>
 
+#if _MSC_VER <= 1916
+#ifdef _M_CEE_PURE
+#define _EXTERN_C_UNLESS_PURE
+#define _END_EXTERN_C_UNLESS_PURE
+#define _STATIC_UNLESS_PURE // Avoid warning C4640: construction of local static object is not thread-safe (/Wall)
+#else // ^^^ _M_CEE_PURE / !_M_CEE_PURE vvv
+#define _EXTERN_C_UNLESS_PURE     _EXTERN_C
+#define _END_EXTERN_C_UNLESS_PURE _END_EXTERN_C
+#define _STATIC_UNLESS_PURE       static
+#endif // _M_CEE_PURE
+#endif
+
 #include <cstdlib>
 
 #if _KERNEL_MODE

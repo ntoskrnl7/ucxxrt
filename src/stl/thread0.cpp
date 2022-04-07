@@ -5,7 +5,11 @@
 
 #include <cstdlib>
 #include <system_error>
+#if _MSC_VER > 1916
 #include <xthreads.h>
+#else
+#include <thr/xthread>
+#endif
 
 _STD_BEGIN
 

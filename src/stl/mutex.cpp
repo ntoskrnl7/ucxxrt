@@ -7,8 +7,14 @@
 #include <cstdlib>
 #include <internal_shared.h>
 #include <type_traits>
+
+#if _MSC_VER > 1916
 #include <xthreads.h>
-#include <xtimec.h>
+#include <xthreads.h>
+#else
+#include <thr/xthread>
+#include <thr/xtime>
+#endif
 
 #include "primitives.hpp"
 
@@ -29,7 +35,9 @@
 #define _THREAD_QUOT(x)           _THREAD_QUOTX(x)
 #define _THREAD_ASSERT(expr, msg) ((expr) ? (void) 0 : _Thrd_abort(__FILE__ "(" _THREAD_QUOT(__LINE__) "): " msg))
 #else // _THREAD_CHECKX
+#ifndef _THREAD_ASSERT
 #define _THREAD_ASSERT(expr, msg) ((void) 0)
+#endif
 #endif // _THREAD_CHECKX
 
 __stl_sync_api_modes_enum __stl_sync_api_impl_mode = __stl_sync_api_modes_enum::normal;

@@ -221,9 +221,13 @@ ISA_AVAILABLE_AVX2:
 	__isa_available = __ISA_AVAILABLE_AVX2;
 	__isa_enabled = __ISA_ENABLED_X86 | __ISA_ENABLED_SSE2 | __ISA_ENABLED_SSE42 | __ISA_ENABLED_AVX | __ISA_ENABLED_AVX2;
 	return;
-
 ISA_AVAILABLE_AVX512:
+	// https://devblogs.microsoft.com/cppblog/avx-512-auto-vectorization-in-msvc/
+#if _MSC_VER >= 1923
 	__isa_available = __ISA_AVAILABLE_AVX512;
+#else
+	__isa_available = 6;
+#endif
 	__isa_enabled = __ISA_ENABLED_X86 | __ISA_ENABLED_SSE2 | __ISA_ENABLED_SSE42 | __ISA_ENABLED_AVX | __ISA_ENABLED_AVX2 | __ISA_ENABLED_AVX512;
 	return;
 

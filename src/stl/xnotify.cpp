@@ -4,7 +4,11 @@
 // thread exit notification functions
 
 #include <cstdlib>
+#if _MSC_VER > 1916
 #include <xthreads.h>
+#else
+#include <thr/xthread>
+#endif
 
 // #include <Windows.h>
 

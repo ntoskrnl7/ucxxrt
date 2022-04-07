@@ -20,6 +20,14 @@ _ACRTIMP void __cdecl _unlock_locales(void)
 }
 #endif
 
+
+#if _MSC_VER <= 1916
+#define _XLOCK_NOEXCEPT	
+#else
+#define _XLOCK_NOEXCEPT	noexcept
+#endif
+
+
 _STD_BEGIN
 
 constexpr int _Max_lock = 8; // must be power of two
@@ -32,7 +40,7 @@ static long init = -1;
 
 #if !defined(MRTDLL)
 
-__thiscall _Init_locks::_Init_locks() noexcept { // initialize locks
+__thiscall _Init_locks::_Init_locks() _XLOCK_NOEXCEPT { // initialize locks
     if (InterlockedIncrement(&init) == 0) {
         for (auto& elem : mtx) {
             _Mtxinit(&elem);
@@ -40,7 +48,7 @@ __thiscall _Init_locks::_Init_locks() noexcept { // initialize locks
     }
 }
 
-__thiscall _Init_locks::~_Init_locks() noexcept { // clean up locks
+__thiscall _Init_locks::~_Init_locks() _XLOCK_NOEXCEPT { // clean up locks
     if (InterlockedDecrement(&init) < 0) {
         for (auto& elem : mtx) {
             _Mtxdst(&elem);
@@ -50,7 +58,7 @@ __thiscall _Init_locks::~_Init_locks() noexcept { // clean up locks
 
 #endif
 
-void __cdecl _Init_locks::_Init_locks_ctor(_Init_locks*) noexcept { // initialize locks
+void __cdecl _Init_locks::_Init_locks_ctor(_Init_locks*) _XLOCK_NOEXCEPT { // initialize locks
     if (InterlockedIncrement(&init) == 0) {
         for (auto& elem : mtx) {
             _Mtxinit(&elem);
@@ -58,7 +66,7 @@ void __cdecl _Init_locks::_Init_locks_ctor(_Init_locks*) noexcept { // initializ
     }
 }
 
-void __cdecl _Init_locks::_Init_locks_dtor(_Init_locks*) noexcept { // clean up locks
+void __cdecl _Init_locks::_Init_locks_dtor(_Init_locks*) _XLOCK_NOEXCEPT { // clean up locks
     if (InterlockedDecrement(&init) < 0) {
         for (auto& elem : mtx) {
             _Mtxdst(&elem);
@@ -70,7 +78,7 @@ static _Init_locks initlocks;
 
 #if !defined(MRTDLL)
 
-__thiscall _Lockit::_Lockit() noexcept : _Locktype(0) { // lock default mutex
+__thiscall _Lockit::_Lockit() _XLOCK_NOEXCEPT : _Locktype(0) { // lock default mutex
     if (_Locktype == _LOCK_LOCALE) {
         _lock_locales();
     }
@@ -79,7 +87,7 @@ __thiscall _Lockit::_Lockit() noexcept : _Locktype(0) { // lock default mutex
     }
 }
 
-__thiscall _Lockit::_Lockit(int kind) noexcept : _Locktype(kind) { // lock the mutex
+__thiscall _Lockit::_Lockit(int kind) _XLOCK_NOEXCEPT : _Locktype(kind) { // lock the mutex
     if (_Locktype == _LOCK_LOCALE) {
         _lock_locales();
     }
@@ -99,11 +107,11 @@ __thiscall _Lockit::~_Lockit() noexcept { // unlock the mutex
 
 #endif
 
-void __cdecl _Lockit::_Lockit_ctor(_Lockit*) noexcept { // lock default mutex
+void __cdecl _Lockit::_Lockit_ctor(_Lockit*) _XLOCK_NOEXCEPT { // lock default mutex
     _Mtxlock(&mtx[0]);
 }
 
-void __cdecl _Lockit::_Lockit_ctor(_Lockit* _This, int kind) noexcept { // lock the mutex
+void __cdecl _Lockit::_Lockit_ctor(_Lockit* _This, int kind) _XLOCK_NOEXCEPT { // lock the mutex
     if (kind == _LOCK_LOCALE) {
         _lock_locales();
     }
@@ -113,12 +121,12 @@ void __cdecl _Lockit::_Lockit_ctor(_Lockit* _This, int kind) noexcept { // lock 
     }
 }
 
-void __cdecl _Lockit::_Lockit_dtor(_Lockit* _This) noexcept { // unlock the mutex
+void __cdecl _Lockit::_Lockit_dtor(_Lockit* _This) _XLOCK_NOEXCEPT { // unlock the mutex
     _Mtxunlock(&mtx[_This->_Locktype]);
 }
 
 _RELIABILITY_CONTRACT
-void __cdecl _Lockit::_Lockit_ctor(int kind) noexcept { // lock the mutex
+void __cdecl _Lockit::_Lockit_ctor(int kind) _XLOCK_NOEXCEPT { // lock the mutex
     if (kind == _LOCK_LOCALE) {
         _lock_locales();
     }
@@ -128,7 +136,7 @@ void __cdecl _Lockit::_Lockit_ctor(int kind) noexcept { // lock the mutex
 }
 
 _RELIABILITY_CONTRACT
-void __cdecl _Lockit::_Lockit_dtor(int kind) noexcept { // unlock the mutex
+void __cdecl _Lockit::_Lockit_dtor(int kind) _XLOCK_NOEXCEPT { // unlock the mutex
     if (kind == _LOCK_LOCALE) {
         _unlock_locales();
     }

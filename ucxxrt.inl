@@ -53,9 +53,13 @@
 #endif
 #endif
 
-
+#ifndef _CRTIMP
 #define _CRTIMP
+#endif
+
+#ifndef _VCRTIMP
 #define _VCRTIMP _CRTIMP
+#endif
 
 #ifdef __KERNEL_MODE
 #   ifndef  _KERNEL_MODE
@@ -64,13 +68,11 @@
 #   ifndef  NTOS_KERNEL_RUNTIME
 #       define NTOS_KERNEL_RUNTIME __KERNEL_MODE
 #   endif
-#	include <Ldk/windows.h>
-#   include <ntimage.h>
 #else
-#   include <Windows.h>
 #   pragma comment(lib, "ntdll.lib")
 #endif
 
+#include <Windows.h>
 #include <corecrt.h>
 
 #define _VCRT_BUILD
@@ -81,8 +83,6 @@
 #    endif
 #endif
 
-#include <cstddef>
-#include <cstdlib>
 #include <minwindef.h>
 
 #include "ucxxrt.h"

@@ -34,51 +34,77 @@
       <Platform>ARM64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <!-- i386-->
+  <ItemGroup>
+    <ClCompile Include="..\src\i386\ehprolg2.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\i386\ehprolg3.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\i386\ehprolg3a.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\i386\except.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\i386\trnsctrl.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <MASM Include="..\src\i386\ehprolog.asm">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </MASM>
+    <MASM Include="..\src\i386\exsup.asm">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+      <UseSafeExceptionHandlers Condition="'$(Platform)'=='Win32'">true</UseSafeExceptionHandlers>
+    </MASM>
+    <MASM Include="..\src\i386\ftol.asm">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+      <UseSafeExceptionHandlers Condition="'$(Platform)'=='Win32'">true</UseSafeExceptionHandlers>
+    </MASM>
+    <MASM Include="..\src\i386\ftol2.asm">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+      <UseSafeExceptionHandlers Condition="'$(Platform)'=='Win32'">true</UseSafeExceptionHandlers>
+    </MASM>
+    <MASM Include="..\src\i386\ftol3.asm">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+      <UseSafeExceptionHandlers Condition="'$(Platform)'=='Win32'">true</UseSafeExceptionHandlers>
+    </MASM>
+    <MASM Include="..\src\i386\lowhelpr.asm">
+      <UseSafeExceptionHandlers Condition="'$(Platform)'=='Win32'">true</UseSafeExceptionHandlers>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </MASM>
+    <None Include="..\src\i386\cruntime.inc">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\src\i386\exsup.inc">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <!-- x64 -->
+  <ItemGroup>
+    <ClCompile Include="..\src\vcruntime\locales.cpp" />
+    <ClCompile Include="..\src\x64\except.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'!='x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\x64\gshandlereh.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'!='x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\x64\gshandlereh4.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'!='x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <MASM Include="..\src\x64\handlers.asm">
+      <ExcludedFromBuild Condition="'$(Platform)'!='x64'">true</ExcludedFromBuild>
+    </MASM>
+    <MASM Include="..\src\x64\notify.asm">
+      <ExcludedFromBuild Condition="'$(Platform)'!='x64'">true</ExcludedFromBuild>
+    </MASM>
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\cpu_disp.cpp" />
     <ClCompile Include="..\src\dbgrpt.cpp" />
     <ClCompile Include="..\src\errno.cpp" />
     <ClCompile Include="..\src\fltused.cpp" />
-    <ClCompile Include="..\src\i386\ehprolg2.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\src\i386\ehprolg3.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\src\i386\ehprolg3a.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\src\i386\except.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\src\i386\trnsctrl.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\src\malloc.cpp" />
     <ClCompile Include="..\src\malloc_align.cpp" />
     <ClCompile Include="..\src\math.cpp" />
@@ -86,75 +112,18 @@
     <ClCompile Include="..\src\new_handler.cpp" />
     <ClCompile Include="..\src\new_mode.cpp" />
     <ClCompile Include="..\src\startup.cpp" />
-    <ClCompile Include="..\src\stl\cond.cpp">
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\mutex.cpp">
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\sharedmutex.cpp" />
-    <ClCompile Include="..\src\stl\xnotify.cpp">
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xonce.cpp" />
-    <ClCompile Include="..\src\stl\xthrow.cpp" />
-    <ClCompile Include="..\src\stl\cthread.cpp">
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\syserror.cpp" />
-    <ClCompile Include="..\src\stl\thread0.cpp" />
-    <ClCompile Include="..\src\stl\xlock.cpp">
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xmtx.cpp" />
-    <ClCompile Include="..\src\stl\xtime.cpp">
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Cdecl</CallingConvention>
-    </ClCompile>
     <ClCompile Include="..\src\sys_main.cpp" />
     <ClCompile Include="..\src\terminate.cpp" />
     <ClCompile Include="..\src\ucxxrt.cpp" />
+    <ClInclude Include="..\inc\malloc.h" />
+    <ClInclude Include="..\inc\new_user.h" />
+    <ClInclude Include="..\ucxxrt.h" />
+    <None Include="..\ucxxrt.inl" />
+    <None Include="..\src\misc\cfg_support.inc" />
+  </ItemGroup>
+  <!-- vcruntime -->
+  <ItemGroup>
+    <ClCompile Include="..\src\vcruntime\crt.cpp" />
     <ClCompile Include="..\src\vcruntime\delete.cpp" />
     <ClCompile Include="..\src\vcruntime\ehhelpers.cpp" />
     <ClCompile Include="..\src\vcruntime\ehstate.cpp" />
@@ -181,37 +150,6 @@
     <ClCompile Include="..\src\vcruntime\unexpected.cpp" />
     <ClCompile Include="..\src\vcruntime\utility.cpp" />
     <ClCompile Include="..\src\vcruntime\x86_exception_filter.cpp" />
-    <ClCompile Include="..\src\x64\except.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\src\x64\gshandlereh.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\src\x64\gshandlereh4.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\inc\malloc.h" />
-    <ClInclude Include="..\inc\new_user.h" />
-    <ClInclude Include="..\src\stl\awint.hpp" />
-    <ClInclude Include="..\src\stl\primitives.hpp" />
-    <ClInclude Include="..\src\stl\xmtx.hpp" />
     <ClInclude Include="..\src\vcruntime\ehassert.h" />
     <ClInclude Include="..\src\vcruntime\ehdata.h" />
     <ClInclude Include="..\src\vcruntime\ehdata4.h" />
@@ -224,103 +162,80 @@
     <ClInclude Include="..\src\vcruntime\internal_shared.h" />
     <ClInclude Include="..\src\vcruntime\trnsctrl.h" />
     <ClInclude Include="..\src\vcruntime\vcruntime_internal.h" />
-    <ClInclude Include="..\ucxxrt.h" />
   </ItemGroup>
+  <!-- STL -->
   <ItemGroup>
-    <None Include="..\src\i386\cruntime.inc">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </None>
-    <None Include="..\src\i386\exsup.inc">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </None>
-    <None Include="..\src\misc\cfg_support.inc" />
-    <None Include="..\ucxxrt.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <MASM Include="..\src\i386\ehprolog.asm">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </MASM>
-    <MASM Include="..\src\i386\exsup.asm">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</UseSafeExceptionHandlers>
-      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</UseSafeExceptionHandlers>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </MASM>
-    <MASM Include="..\src\i386\ftol.asm">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</UseSafeExceptionHandlers>
-      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</UseSafeExceptionHandlers>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </MASM>
-    <MASM Include="..\src\i386\ftol2.asm">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</UseSafeExceptionHandlers>
-      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</UseSafeExceptionHandlers>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </MASM>
-    <MASM Include="..\src\i386\ftol3.asm">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</UseSafeExceptionHandlers>
-      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</UseSafeExceptionHandlers>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </MASM>
-    <MASM Include="..\src\i386\lowhelpr.asm">
-      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</UseSafeExceptionHandlers>
-      <UseSafeExceptionHandlers Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</UseSafeExceptionHandlers>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </MASM>
-    <MASM Include="..\src\x64\handlers.asm">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </MASM>
-    <MASM Include="..\src\x64\notify.asm">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
-    </MASM>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\future.cpp" />
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\pplerror.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\ppltasks.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\sharedmutex.cpp" />
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror_import_lib.cpp">
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\taskscheduler.cpp" />
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.c">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xonce.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xthrow.cpp" />
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.hpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.h">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.hpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.h">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\excptptr.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror.cpp">
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\thread0.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xlock.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8D969184-788F-48AA-BF18-2898FC167C91}</ProjectGuid>
@@ -334,7 +249,7 @@
     <ProjectName>ucxxrt</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
     <TargetVersion>Windows10</TargetVersion>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
@@ -342,54 +257,7 @@
     <DriverTargetPlatform>Universal</DriverTargetPlatform>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <TargetVersion>Windows10</TargetVersion>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <DriverTargetPlatform>Universal</DriverTargetPlatform>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <TargetVersion>Windows10</TargetVersion>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <DriverTargetPlatform>Universal</DriverTargetPlatform>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <TargetVersion>Windows10</TargetVersion>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <DriverTargetPlatform>Universal</DriverTargetPlatform>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
-    <TargetVersion>Windows10</TargetVersion>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
-    <TargetVersion>Windows10</TargetVersion>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <DriverTargetPlatform>Universal</DriverTargetPlatform>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
-    <TargetVersion>Windows10</TargetVersion>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <DriverTargetPlatform>Universal</DriverTargetPlatform>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
     <TargetVersion>Windows10</TargetVersion>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
@@ -403,119 +271,26 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ImportGroup Label="PropertySheets">
     <Import Project="..\ucxxrtlib.props" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <Import Project="..\ucxxrtlib.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <Import Project="..\ucxxrtlib.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="..\ucxxrtlib.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="..\ucxxrtlib.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <Import Project="..\ucxxrtlib.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <Import Project="..\ucxxrtlib.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="..\ucxxrtlib.props" />
-  </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile />
+  <ItemDefinitionGroup Condition=" ('$(UCRT_KernelMode)'=='true') ">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\deps\ldk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_STL_WIN32_WINNT=_WIN32_WINNT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)\%(Directory)%(FileName).obj</ObjectFileName>
     </ClCompile>
     <Lib>
       <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile />
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\deps\ldk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Lib>
-      <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile />
-    <ClCompile />
-    <Lib />
-    <Lib>
-      <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\deps\ldk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile />
-    <ClCompile />
-    <Lib />
-    <Lib>
-      <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\deps\ldk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\deps\ldk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Lib>
-      <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\deps\ldk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Lib>
-      <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\deps\ldk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Lib>
-      <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)\deps\ldk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Lib>
-      <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
-  </ItemDefinitionGroup>
+  <!-- IncludePath -->
+  <PropertyGroup Condition=" ('$(UCRT_KernelMode)'=='true') ">
+    <!-- <= 14.16.27023 -->
+    <IncludePath Condition=" ($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0) ">$(SolutionDir)deps\ldk\include\ldk;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath)</IncludePath>
+    <!-- > 14.16.27023 -->
+    <IncludePath Condition=" ($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0) ">$(VC_CRT_SourcePath.Split(%3B)[0])\stl;$(VC_VC_IncludePath.Substring(0,$([MSBuild]::Subtract($(VC_VC_IncludePath.Length()), 1))))\thr;$(SolutionDir)src\stl;$(SolutionDir)deps\ldk\include\ldk;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

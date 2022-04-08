@@ -214,6 +214,19 @@ EXTERN_C _VCRTIMP void __cdecl RENAME_EH_EXTERN(_FindAndUnlinkFrame)(
 
 typedef void (__stdcall* PFNPREPARE_FOR_THROW)(void* ExceptionInfo);
 
+typedef struct WinRTExceptionInfo
+{
+	void*                description;
+	void*                restrictedErrorString;
+	void*                restrictedErrorReference;
+	void*                capabilitySid;
+	long                 hr;
+	void*                restrictedInfo;
+	ThrowInfo*           throwInfo;
+	unsigned int         size;
+	PFNPREPARE_FOR_THROW PrepareThrow;
+} WINRTEXCEPTIONINFO;
+
 EXTERN_C _VCRTIMP void** __cdecl __current_exception();
 EXTERN_C _VCRTIMP void** __cdecl __current_exception_context();
 EXTERN_C _VCRTIMP int*   __cdecl __processing_throw();

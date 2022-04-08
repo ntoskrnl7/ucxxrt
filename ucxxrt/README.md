@@ -4,7 +4,7 @@
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/MiroKaku/ucxxrt/blob/master/LICENSE)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 ![Windows](https://img.shields.io/badge/Windows-7+-orange.svg)
-![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2019-purple.svg)
+![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2017-purple.svg)
 
 * [简体中文](./docs/zh-cn.md), [한국어](./docs/ko-kr.md)
 
@@ -118,7 +118,7 @@ void Test$Thread() {
 
 ## 2. Compile
 
-IDE：Visual Studio 2019 or higher
+IDE：Visual Studio 2017 or higher
 
 * `git clone --recursive https://github.com/ntoskrnl7/ucxxrt.git`
 * Open `ucxxrt.sln` and compile

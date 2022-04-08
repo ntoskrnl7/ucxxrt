@@ -400,8 +400,6 @@ void Test$SharedMutex() {
     thread2.join();
 }
 
-
-
 #ifdef _KERNEL_MODE
 EXTERN_C NTSTATUS DriverMain(PDRIVER_OBJECT aDriverObject, PUNICODE_STRING /*aRegistry*/)
 #else

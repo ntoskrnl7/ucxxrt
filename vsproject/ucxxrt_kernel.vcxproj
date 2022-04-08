@@ -34,7 +34,6 @@
       <Platform>ARM64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-
   <!-- i386-->
   <ItemGroup>
     <ClCompile Include="..\src\i386\ehprolg2.cpp">
@@ -52,7 +51,6 @@
     <ClCompile Include="..\src\i386\trnsctrl.cpp">
       <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
     </ClCompile>
-
     <MASM Include="..\src\i386\ehprolog.asm">
       <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
     </MASM>
@@ -76,7 +74,6 @@
       <UseSafeExceptionHandlers Condition="'$(Platform)'=='Win32'">true</UseSafeExceptionHandlers>
       <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
     </MASM>
-
     <None Include="..\src\i386\cruntime.inc">
       <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
     </None>
@@ -84,9 +81,9 @@
       <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
     </None>
   </ItemGroup>
-
-    <!-- x64 -->
+  <!-- x64 -->
   <ItemGroup>
+    <ClCompile Include="..\src\vcruntime\locales.cpp" />
     <ClCompile Include="..\src\x64\except.cpp">
       <ExcludedFromBuild Condition="'$(Platform)'!='x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -96,7 +93,6 @@
     <ClCompile Include="..\src\x64\gshandlereh4.cpp">
       <ExcludedFromBuild Condition="'$(Platform)'!='x64'">true</ExcludedFromBuild>
     </ClCompile>
-
     <MASM Include="..\src\x64\handlers.asm">
       <ExcludedFromBuild Condition="'$(Platform)'!='x64'">true</ExcludedFromBuild>
     </MASM>
@@ -104,7 +100,6 @@
       <ExcludedFromBuild Condition="'$(Platform)'!='x64'">true</ExcludedFromBuild>
     </MASM>
   </ItemGroup>
-
   <ItemGroup>
     <ClCompile Include="..\src\cpu_disp.cpp" />
     <ClCompile Include="..\src\dbgrpt.cpp" />
@@ -120,17 +115,15 @@
     <ClCompile Include="..\src\sys_main.cpp" />
     <ClCompile Include="..\src\terminate.cpp" />
     <ClCompile Include="..\src\ucxxrt.cpp" />
-
     <ClInclude Include="..\inc\malloc.h" />
     <ClInclude Include="..\inc\new_user.h" />
     <ClInclude Include="..\ucxxrt.h" />
-
-    <None Include="..\src\misc\cfg_support.inc" />
     <None Include="..\ucxxrt.inl" />
+    <None Include="..\src\misc\cfg_support.inc" />
   </ItemGroup>
-
   <!-- vcruntime -->
   <ItemGroup>
+    <ClCompile Include="..\src\vcruntime\crt.cpp" />
     <ClCompile Include="..\src\vcruntime\delete.cpp" />
     <ClCompile Include="..\src\vcruntime\ehhelpers.cpp" />
     <ClCompile Include="..\src\vcruntime\ehstate.cpp" />
@@ -157,7 +150,6 @@
     <ClCompile Include="..\src\vcruntime\unexpected.cpp" />
     <ClCompile Include="..\src\vcruntime\utility.cpp" />
     <ClCompile Include="..\src\vcruntime\x86_exception_filter.cpp" />
-
     <ClInclude Include="..\src\vcruntime\ehassert.h" />
     <ClInclude Include="..\src\vcruntime\ehdata.h" />
     <ClInclude Include="..\src\vcruntime\ehdata4.h" />
@@ -171,57 +163,45 @@
     <ClInclude Include="..\src\vcruntime\trnsctrl.h" />
     <ClInclude Include="..\src\vcruntime\vcruntime_internal.h" />
   </ItemGroup>
-
   <!-- STL -->
-  <ItemGroup>    
-    <ClCompile Include="..\deps\STL\stl\src\future.cpp" />
-    <ClCompile Include="..\deps\STL\stl\src\cond.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Include="..\deps\STL\stl\src\pplerror.cpp" />
-    <ClCompile Include="..\deps\STL\stl\src\ppltasks.cpp" />
-    <ClCompile Include="..\deps\STL\stl\src\sharedmutex.cpp" />
-    <ClCompile Include="..\deps\STL\stl\src\syserror_import_lib.cpp">
-      <PreprocessorDefinitions>_STL_COMPILER_PREPROCESSOR=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <ClCompile Include="..\deps\STL\stl\src\taskscheduler.cpp" />
-    <ClCompile Include="..\deps\STL\stl\src\xnotify.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Include="..\deps\STL\stl\src\xonce.cpp" />
-    <ClCompile Include="..\deps\STL\stl\src\xthrow.cpp" />
-    <ClCompile Include="..\deps\STL\stl\src\cthread.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Include="..\deps\STL\stl\src\xmtx.cpp" />
-    <ClCompile Include="..\deps\STL\stl\src\xtime.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-
-    <ClInclude Include="..\deps\STL\stl\src\primitives.hpp" />
-  </ItemGroup>
-
-  <!-- STL (dirty) -->
   <ItemGroup>
-    <ClCompile Include="..\src\stl\excptptr.cpp">
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\future.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.cpp">
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
-    <ClCompile Include="..\src\stl\mutex.cpp">
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\pplerror.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\ppltasks.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\sharedmutex.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror_import_lib.cpp">
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\taskscheduler.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.cpp">
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
-    <ClCompile Include="..\src\stl\syserror.cpp">
-      <PreprocessorDefinitions>_STL_COMPILER_PREPROCESSOR=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ForcedIncludeFiles>__msvc_system_error_abi.hpp;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\thread0.cpp" />
-    <ClCompile Include="..\src\stl\xlock.cpp">
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xonce.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xthrow.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.cpp">
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
-
-    <ClInclude Include="..\src\stl\awint.hpp" />
-    <ClInclude Include="..\src\stl\xmtx.hpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClInclude Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.hpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\excptptr.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror.cpp">
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\thread0.cpp" />
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xlock.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClInclude Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.hpp" />
   </ItemGroup>
-
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8D969184-788F-48AA-BF18-2898FC167C91}</ProjectGuid>
     <TemplateGuid>{0a049372-4c4d-4ea0-a64e-dc6ad88ceca1}</TemplateGuid>
@@ -233,9 +213,7 @@
     <DriverType>KMDF</DriverType>
     <ProjectName>ucxxrt</ProjectName>
   </PropertyGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-
   <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
     <TargetVersion>Windows10</TargetVersion>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -252,7 +230,6 @@
     <DriverTargetPlatform>Universal</DriverTargetPlatform>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -262,26 +239,23 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="..\ucxxrtlib.props" />
   </ImportGroup>
-
   <ItemDefinitionGroup Condition=" ('$(UCRT_KernelMode)'=='true') ">
     <ClCompile>
       <PreprocessorDefinitions>_STL_WIN32_WINNT=_WIN32_WINNT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)\%(Directory)%(FileName).obj</ObjectFileName>
     </ClCompile>
     <Lib>
       <AdditionalDependencies>ldk.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
-
   <!-- IncludePath -->
   <PropertyGroup Condition=" ('$(UCRT_KernelMode)'=='true') ">
     <!-- <= 14.16.27023 -->
     <IncludePath Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)">$(SolutionDir)\deps\ldk\include\ldk;$(SolutionDir)\deps\ldk\include;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath);$(SolutionDir)src\stl;$(SolutionDir)\deps\STL\stl\inc;$(SolutionDir)\deps\STL\stl\src</IncludePath>
-
     <!-- > 14.16.27023 -->
     <IncludePath Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)">$(VC_VC_IncludePath.Substring(0,$([MSBuild]::Subtract($(VC_VC_IncludePath.Length()), 1))))\thr;$(SolutionDir)\deps\ldk\include\ldk;$(SolutionDir)\deps\ldk\include;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath);$(SolutionDir)src\stl;$(SolutionDir)\deps\STL\stl\inc;$(SolutionDir)\deps\STL\stl\src</IncludePath>
   </PropertyGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -4,7 +4,7 @@
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/MiroKaku/ucxxrt/blob/master/LICENSE)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 ![Windows](https://img.shields.io/badge/Windows-7+-orange.svg)
-![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2019-purple.svg)
+![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2017-purple.svg)
 
 ## 1. 시작
 
@@ -112,7 +112,7 @@ void Test$Thread() {
 
 ## 2. 빌드
 
-IDE：Visual Studio 2019 이상
+IDE：Visual Studio 2017 이상
 
 * `git clone --recursive https://github.com/ntoskrnl7/ucxxrt.git`
 * `ucxxrt.sln`을 열어 빌드

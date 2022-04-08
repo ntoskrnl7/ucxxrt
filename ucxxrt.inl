@@ -68,13 +68,11 @@
 #   ifndef  NTOS_KERNEL_RUNTIME
 #       define NTOS_KERNEL_RUNTIME __KERNEL_MODE
 #   endif
-#	include <Ldk/windows.h>
-#   include <ntimage.h>
 #else
-#   include <Windows.h>
 #   pragma comment(lib, "ntdll.lib")
 #endif
 
+#include <Windows.h>
 #include <corecrt.h>
 
 #define _VCRT_BUILD

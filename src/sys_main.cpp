@@ -12,7 +12,7 @@
 
 #include <corecrt_startup.h>
 #include <vcruntime_internal.h>
-#include <Ldk/ldk.h>
+#include <ldk.h>
 
 #ifdef _KERNEL_MODE
 

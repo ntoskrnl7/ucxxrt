@@ -1,3 +1,7 @@
+//
+// :-(
+//
+
 // Copyright (c) Microsoft Corporation.
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
@@ -10,6 +14,7 @@
 
 #include "xmtx.hpp"
 
+
 #if _KERNEL_MODE
 _ACRTIMP void __cdecl _lock_locales(void)
 {
@@ -19,7 +24,6 @@ _ACRTIMP void __cdecl _unlock_locales(void)
 {
 }
 #endif
-
 
 #if _MSC_VER <= 1916
 #define _XLOCK_NOEXCEPT	
@@ -81,8 +85,7 @@ static _Init_locks initlocks;
 __thiscall _Lockit::_Lockit() _XLOCK_NOEXCEPT : _Locktype(0) { // lock default mutex
     if (_Locktype == _LOCK_LOCALE) {
         _lock_locales();
-    }
-    else {
+    } else {
         _Mtxlock(&mtx[0]);
     }
 }
@@ -90,17 +93,15 @@ __thiscall _Lockit::_Lockit() _XLOCK_NOEXCEPT : _Locktype(0) { // lock default m
 __thiscall _Lockit::_Lockit(int kind) _XLOCK_NOEXCEPT : _Locktype(kind) { // lock the mutex
     if (_Locktype == _LOCK_LOCALE) {
         _lock_locales();
-    }
-    else if (_Locktype < _Max_lock) {
+    } else if (_Locktype < _Max_lock) {
         _Mtxlock(&mtx[_Locktype]);
     }
 }
 
-__thiscall _Lockit::~_Lockit() noexcept { // unlock the mutex
+__thiscall _Lockit::~_Lockit() _XLOCK_NOEXCEPT { // unlock the mutex
     if (_Locktype == _LOCK_LOCALE) {
         _unlock_locales();
-    }
-    else if (_Locktype < _Max_lock) {
+    } else if (_Locktype < _Max_lock) {
         _Mtxunlock(&mtx[_Locktype]);
     }
 }
@@ -114,8 +115,7 @@ void __cdecl _Lockit::_Lockit_ctor(_Lockit*) _XLOCK_NOEXCEPT { // lock default m
 void __cdecl _Lockit::_Lockit_ctor(_Lockit* _This, int kind) _XLOCK_NOEXCEPT { // lock the mutex
     if (kind == _LOCK_LOCALE) {
         _lock_locales();
-    }
-    else {
+    } else {
         _This->_Locktype = kind & (_Max_lock - 1);
         _Mtxlock(&mtx[_This->_Locktype]);
     }
@@ -129,8 +129,7 @@ _RELIABILITY_CONTRACT
 void __cdecl _Lockit::_Lockit_ctor(int kind) _XLOCK_NOEXCEPT { // lock the mutex
     if (kind == _LOCK_LOCALE) {
         _lock_locales();
-    }
-    else {
+    } else {
         _Mtxlock(&mtx[kind & (_Max_lock - 1)]);
     }
 }
@@ -139,8 +138,7 @@ _RELIABILITY_CONTRACT
 void __cdecl _Lockit::_Lockit_dtor(int kind) _XLOCK_NOEXCEPT { // unlock the mutex
     if (kind == _LOCK_LOCALE) {
         _unlock_locales();
-    }
-    else {
+    } else {
         _Mtxunlock(&mtx[kind & (_Max_lock - 1)]);
     }
 }

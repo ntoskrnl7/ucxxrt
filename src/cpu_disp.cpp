@@ -367,7 +367,11 @@ __declspec(naked) void __cdecl __isa_available_init()
 
 		align   16
 	ISA_AVAILABLE_AVX512:
+#if _MSC_VER >= 1923
 		mov     dword ptr [__isa_available], __ISA_AVAILABLE_AVX512
+#else
+		mov     dword ptr[__isa_available], 6
+#endif
 		mov     dword ptr [__isa_enabled], __ISA_ENABLED_X86 or __ISA_ENABLED_SSE2 or __ISA_ENABLED_SSE42 or __ISA_ENABLED_AVX or __ISA_ENABLED_AVX2 or __ISA_ENABLED_AVX512
 		ret
 

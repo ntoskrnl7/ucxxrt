@@ -1,3 +1,7 @@
+//
+// :-(
+//
+
 // Copyright (c) Microsoft Corporation.
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
@@ -5,6 +9,8 @@
 #ifndef _XMTX
 #define _XMTX
 #include <yvals.h>
+
+
 
 #if _MSC_VER <= 1916
 #ifdef _M_CEE_PURE
@@ -18,13 +24,10 @@
 #endif // _M_CEE_PURE
 #endif
 
+
 #include <cstdlib>
 
-#if _KERNEL_MODE
-#include <Ldk/windows.h>
-#else
 #include <Windows.h>
-#endif
 
 #pragma pack(push, _CRT_PACKING)
 #pragma warning(push, 3)

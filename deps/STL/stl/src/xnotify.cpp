@@ -4,13 +4,9 @@
 // thread exit notification functions
 
 #include <cstdlib>
-#if _MSC_VER > 1916
 #include <xthreads.h>
-#else
-#include <thr/xthread>
-#endif
 
-// #include <Windows.h>
+#include <Windows.h>
 
 constexpr int _Nitems = 20;
 
@@ -49,14 +45,13 @@ void _Cnd_register_at_thread_exit(
             }
 
             block = block->next;
-        }
-        else { // found block with available space
+        } else { // found block with available space
             for (int i = 0; i < _Nitems; ++i) { // find empty slot
                 if (block->data[i].mtx == nullptr) { // store into empty slot
                     block->data[i].id._Id = GetCurrentThreadId();
-                    block->data[i].mtx = mtx;
-                    block->data[i].cnd = cnd;
-                    block->data[i].res = p;
+                    block->data[i].mtx    = mtx;
+                    block->data[i].cnd    = cnd;
+                    block->data[i].res    = p;
                     ++block->num_used;
                     break;
                 }
@@ -87,7 +82,7 @@ void _Cnd_unregister_at_thread_exit(_Mtx_t mtx) { // unregister condition variab
 
 void _Cnd_do_broadcast_at_thread_exit() { // notify condition variables waiting for this thread to exit
     // find condition variables waiting for this thread to exit
-    _At_thread_exit_block* block = &_Thread_exit_data;
+    _At_thread_exit_block* block       = &_Thread_exit_data;
     const unsigned int currentThreadId = _Thrd_id();
 
     _Lock_at_thread_exit_mutex();

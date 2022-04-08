@@ -17,20 +17,20 @@ namespace Concurrency {
     namespace details {
         class __declspec(novtable) stl_critical_section_interface {
         public:
-            virtual void lock() = 0;
-            virtual bool try_lock() = 0;
+            virtual void lock()                     = 0;
+            virtual bool try_lock()                 = 0;
             virtual bool try_lock_for(unsigned int) = 0;
-            virtual void unlock() = 0;
-            virtual void destroy() = 0;
+            virtual void unlock()                   = 0;
+            virtual void destroy()                  = 0;
         };
 
         class __declspec(novtable) stl_condition_variable_interface {
         public:
-            virtual void wait(stl_critical_section_interface*) = 0;
+            virtual void wait(stl_critical_section_interface*)                   = 0;
             virtual bool wait_for(stl_critical_section_interface*, unsigned int) = 0;
-            virtual void notify_one() = 0;
-            virtual void notify_all() = 0;
-            virtual void destroy() = 0;
+            virtual void notify_one()                                            = 0;
+            virtual void notify_all()                                            = 0;
+            virtual void destroy()                                               = 0;
         };
 
         class stl_critical_section_vista final : public stl_critical_section_interface {
@@ -41,7 +41,7 @@ namespace Concurrency {
 
             stl_critical_section_vista(const stl_critical_section_vista&) = delete;
             stl_critical_section_vista& operator=(const stl_critical_section_vista&) = delete;
-            ~stl_critical_section_vista() = delete;
+            ~stl_critical_section_vista()                                            = delete;
 
             void destroy() override {
                 DeleteCriticalSection(&_M_critical_section);
@@ -78,7 +78,7 @@ namespace Concurrency {
                 InitializeConditionVariable(&m_condition_variable);
             }
 
-            ~stl_condition_variable_vista() = delete;
+            ~stl_condition_variable_vista()                                   = delete;
             stl_condition_variable_vista(const stl_condition_variable_vista&) = delete;
             stl_condition_variable_vista& operator=(const stl_condition_variable_vista&) = delete;
 
@@ -92,7 +92,7 @@ namespace Concurrency {
 
             bool wait_for(stl_critical_section_interface* lock, unsigned int timeout) override {
                 return SleepConditionVariableCS(&m_condition_variable,
-                    static_cast<stl_critical_section_vista*>(lock)->native_handle(), timeout)
+                           static_cast<stl_critical_section_vista*>(lock)->native_handle(), timeout)
                     != 0;
             }
 
@@ -114,7 +114,7 @@ namespace Concurrency {
                 InitializeSRWLock(&m_srw_lock);
             }
 
-            ~stl_critical_section_win7() = delete;
+            ~stl_critical_section_win7()                                = delete;
             stl_critical_section_win7(const stl_critical_section_win7&) = delete;
             stl_critical_section_win7& operator=(const stl_critical_section_win7&) = delete;
 
@@ -151,7 +151,7 @@ namespace Concurrency {
                 InitializeConditionVariable(&m_condition_variable);
             }
 
-            ~stl_condition_variable_win7() = delete;
+            ~stl_condition_variable_win7()                                  = delete;
             stl_condition_variable_win7(const stl_condition_variable_win7&) = delete;
             stl_condition_variable_win7& operator=(const stl_condition_variable_win7&) = delete;
 
@@ -165,7 +165,7 @@ namespace Concurrency {
 
             bool wait_for(stl_critical_section_interface* lock, unsigned int timeout) override {
                 return SleepConditionVariableSRW(&m_condition_variable,
-                    static_cast<stl_critical_section_win7*>(lock)->native_handle(), timeout, 0)
+                           static_cast<stl_critical_section_win7*>(lock)->native_handle(), timeout, 0)
                     != 0;
             }
 
@@ -182,14 +182,14 @@ namespace Concurrency {
         };
 
         inline bool are_win7_sync_apis_available() {
-//#if _STL_WIN32_WINNT >= _WIN32_WINNT_WIN7
+#if _STL_WIN32_WINNT >= _WIN32_WINNT_WIN7
             return true;
-//#else
-//            // TryAcquireSRWLockExclusive ONLY available on Windows 7+
-//            DYNAMICGETCACHEDFUNCTION(
-//                PFNTRYACQUIRESRWLOCKEXCLUSIVE, TryAcquireSRWLockExclusive, pfTryAcquireSRWLockExclusive);
-//            return pfTryAcquireSRWLockExclusive != nullptr;
-//#endif
+#else
+            // TryAcquireSRWLockExclusive ONLY available on Windows 7+
+            DYNAMICGETCACHEDFUNCTION(
+                PFNTRYACQUIRESRWLOCKEXCLUSIVE, TryAcquireSRWLockExclusive, pfTryAcquireSRWLockExclusive);
+            return pfTryAcquireSRWLockExclusive != nullptr;
+#endif
         }
 
         inline void create_stl_critical_section(stl_critical_section_interface* p) {
@@ -235,9 +235,9 @@ namespace Concurrency {
         }
 
 #if defined _CRT_WINDOWS
-        const size_t stl_critical_section_max_size = sizeof(stl_critical_section_win7);
-        const size_t stl_condition_variable_max_size = sizeof(stl_condition_variable_win7);
-        const size_t stl_critical_section_max_alignment = alignof(stl_critical_section_win7);
+        const size_t stl_critical_section_max_size        = sizeof(stl_critical_section_win7);
+        const size_t stl_condition_variable_max_size      = sizeof(stl_condition_variable_win7);
+        const size_t stl_critical_section_max_alignment   = alignof(stl_critical_section_win7);
         const size_t stl_condition_variable_max_alignment = alignof(stl_condition_variable_win7);
 #elif defined _STL_CONCRT_SUPPORT
 
@@ -247,9 +247,9 @@ namespace Concurrency {
         const size_t alignof_stl_critical_section_concrt = 8;
         const size_t alignof_stl_condition_variable_concrt = 8;
 #else // ^^^ 64-bit / 32-bit vvv
-        const size_t sizeof_stl_critical_section_concrt = 36;
-        const size_t sizeof_stl_condition_variable_concrt = 40;
-        const size_t alignof_stl_critical_section_concrt = 4;
+        const size_t sizeof_stl_critical_section_concrt    = 36;
+        const size_t sizeof_stl_condition_variable_concrt  = 40;
+        const size_t alignof_stl_critical_section_concrt   = 4;
         const size_t alignof_stl_condition_variable_concrt = 4;
 #endif // ^^^ 32-bit ^^^
 

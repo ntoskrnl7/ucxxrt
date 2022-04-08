@@ -8,19 +8,11 @@
 #include <cstdlib>
 #include <cstring>
 #include <process.h>
-#if _MSC_VER > 1916
 #include <xthreads.h>
-#else
-#include <thr/xthread>
-#endif
 
-#if _KERNEL_MODE
-#include <Ldk/windows.h>
-#else
 #include <Windows.h>
 
 #include "awint.hpp"
-#endif
 
 namespace {
     using _Thrd_start_t = int (*)(void*);
@@ -99,7 +91,7 @@ _CRTIMP2_PURE int _Thrd_equal(_Thrd_t thr0, _Thrd_t thr1) { // return 1 if thr0 
 _CRTIMP2_PURE _Thrd_t _Thrd_current() { // return _Thrd_t identifying current thread
     _Thrd_t result;
     result._Hnd = nullptr;
-    result._Id = GetCurrentThreadId();
+    result._Id  = GetCurrentThreadId();
     return result;
 }
 
@@ -122,10 +114,10 @@ _CRTIMP2_PURE int _Thrd_create(_Thrd_t* thr, _Thrd_start_t func, void* d) { // c
     _Mtx_t mtx;
     _Cnd_init(&cond);
     _Mtx_init(&mtx, _Mtx_plain);
-    b.func = func;
-    b.data = d;
-    b.cond = &cond;
-    b.mtx = &mtx;
+    b.func    = func;
+    b.data    = d;
+    b.cond    = &cond;
+    b.mtx     = &mtx;
     b.started = &started;
     _Mtx_lock(mtx);
     if ((res = _Thrd_start(thr, _Thrd_runner, &b)) == _Thrd_success) { // wait for handshake

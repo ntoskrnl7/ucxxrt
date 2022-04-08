@@ -6,14 +6,8 @@
 #include <cstdlib>
 #include <internal_shared.h>
 #include <type_traits>
-
-#if _MSC_VER > 1916
 #include <xthreads.h>
 #include <xtimec.h>
-#else
-#include <thr/xthreads.h>
-#include <thr/xtime>
-#endif
 
 #include "primitives.hpp"
 
@@ -68,14 +62,13 @@ int _Cnd_wait(const _Cnd_t cond, const _Mtx_t mtx) { // wait until signaled
 }
 
 int _Cnd_timedwait(const _Cnd_t cond, const _Mtx_t mtx, const xtime* const target) { // wait until signaled or timeout
-    int res = _Thrd_success;
+    int res       = _Thrd_success;
     const auto cs = static_cast<Concurrency::details::stl_critical_section_interface*>(_Mtx_getconcrtcs(mtx));
     if (target == nullptr) { // no target time specified, wait on mutex
         _Mtx_clear_owner(mtx);
         cond->_get_cv()->wait(cs);
         _Mtx_reset_owner(mtx);
-    }
-    else { // target time specified, wait for it
+    } else { // target time specified, wait for it
         xtime now;
         xtime_get(&now, TIME_UTC);
         _Mtx_clear_owner(mtx);

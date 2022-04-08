@@ -5,18 +5,14 @@
 
 #include "xmtx.hpp"
 
-
-#if _KERNEL_MODE
-#include <Ldk/windows.h>
-#endif
-
+#include "awint.hpp"
 
 _EXTERN_C_UNLESS_PURE
 
 // Win32 critical sections are recursive
 
 void __CLRCALL_PURE_OR_CDECL _Mtxinit(_Rmtx* _Mtx) noexcept { // initialize mutex
-    InitializeCriticalSectionAndSpinCount(_Mtx, 4000);
+    InitializeCriticalSectionEx(_Mtx, 4000, 0);
 }
 
 void __CLRCALL_PURE_OR_CDECL _Mtxdst(_Rmtx* _Mtx) noexcept { // delete mutex

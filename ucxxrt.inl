@@ -53,9 +53,13 @@
 #endif
 #endif
 
-
+#ifndef _CRTIMP
 #define _CRTIMP
+#endif
+
+#ifndef _VCRTIMP
 #define _VCRTIMP _CRTIMP
+#endif
 
 #ifdef __KERNEL_MODE
 #   ifndef  _KERNEL_MODE

@@ -4,36 +4,13 @@
 // xtime functions
 
 #include <atomic>
-
-#if _MSC_VER > 1916
 #include <xtimec.h>
-#else
-#include <thr/xtimec.h>
-#endif
 
-#if _KERNEL_MODE
-#include <Ldk/windows.h>
-
-#if _STL_WIN32_WINNT >= _WIN32_WINNT_WIN8
-
-#define __crtGetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime) \
-    GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime)
-
-#else // _STL_WIN32_WINNT >= _WIN32_WINNT_WIN8
-
-_CRTIMP2 void __cdecl __crtGetSystemTimePreciseAsFileTime(_Out_ LPFILETIME lpSystemTimeAsFileTime) {
-    GetSystemTimeAsFileTime(lpSystemTimeAsFileTime);
-}
-
-#endif // _STL_WIN32_WINNT >= _WIN32_WINNT_WIN8
-
-#else
 #include "awint.hpp"
-#endif
 
-constexpr long _Nsec_per_sec = 1000000000L;
+constexpr long _Nsec_per_sec  = 1000000000L;
 constexpr long _Nsec_per_msec = 1000000L;
-constexpr int _Msec_per_sec = 1000;
+constexpr int _Msec_per_sec   = 1000;
 
 static void xtime_normalize(xtime* xt) { // adjust so that 0 <= nsec < 1 000 000 000
     while (xt->nsec < 0) { // normalize target time
@@ -53,20 +30,19 @@ static xtime xtime_diff(const xtime* xt,
     if (diff.nsec < now->nsec) { // avoid underflow
         diff.sec -= now->sec + 1;
         diff.nsec += _Nsec_per_sec - now->nsec;
-    }
-    else { // no underflow
+    } else { // no underflow
         diff.sec -= now->sec;
         diff.nsec -= now->nsec;
     }
     if (diff.sec < 0 || (diff.sec == 0 && diff.nsec <= 0)) { // time is zero
-        diff.sec = 0;
+        diff.sec  = 0;
         diff.nsec = 0;
     }
     return diff;
 }
 
 
-constexpr long long _Epoch = 0x19DB1DED53E8000LL;
+constexpr long long _Epoch      = 0x19DB1DED53E8000LL;
 constexpr long _Nsec100_per_sec = _Nsec_per_sec / 100;
 
 _EXTERN_C
@@ -79,8 +55,8 @@ long long _Xtime_get_ticks() { // get system time in 100-nanosecond intervals si
 
 static void sys_get_time(xtime* xt) { // get system time with nanosecond resolution
     unsigned long long now = _Xtime_get_ticks();
-    xt->sec = static_cast<__time64_t>(now / _Nsec100_per_sec);
-    xt->nsec = static_cast<long>(now % _Nsec100_per_sec) * 100;
+    xt->sec                = static_cast<__time64_t>(now / _Nsec100_per_sec);
+    xt->nsec               = static_cast<long>(now % _Nsec100_per_sec) * 100;
 }
 
 long _Xtime_diff_to_millis2(const xtime* xt1, const xtime* xt2) { // convert time to milliseconds
@@ -97,8 +73,7 @@ long _Xtime_diff_to_millis(const xtime* xt) { // convert time to milliseconds
 int xtime_get(xtime* xt, int type) { // get current time
     if (type != TIME_UTC || xt == nullptr) {
         type = 0;
-    }
-    else {
+    } else {
         sys_get_time(xt);
     }
 
@@ -112,7 +87,7 @@ _CRTIMP2_PURE long long __cdecl _Query_perf_counter() { // get current value of 
 }
 
 _CRTIMP2_PURE long long __cdecl _Query_perf_frequency() { // get frequency of performance counter
-    static std::atomic<long long> freq_cached{ 0 };
+    static std::atomic<long long> freq_cached{0};
     long long freq = freq_cached.load(std::memory_order_relaxed);
     if (freq == 0) {
         LARGE_INTEGER li;

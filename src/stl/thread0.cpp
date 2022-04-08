@@ -1,3 +1,7 @@
+//
+// :-(
+//
+
 // Copyright (c) Microsoft Corporation.
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
@@ -5,10 +9,11 @@
 
 #include <cstdlib>
 #include <system_error>
+#include <xthreads.h>
 #if _MSC_VER > 1916
 #include <xthreads.h>
 #else
-#include <thr/xthread>
+#include <xthread>
 #endif
 
 _STD_BEGIN

@@ -29,13 +29,13 @@
     <Filter Include="ucxxrt\misc">
       <UniqueIdentifier>{c467312d-b6bf-49e0-8c7f-357b501d87ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ucxxrt\stl\dirty">
+      <UniqueIdentifier>{922c4867-97c2-495f-b088-019c77652dc4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ucxxrt.cpp">
       <Filter>ucxxrt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xthrow.cpp">
-      <Filter>ucxxrt\stl</Filter>
     </ClCompile>
     <ClCompile Include="..\src\malloc.cpp">
       <Filter>ucxxrt</Filter>
@@ -175,40 +175,61 @@
     <ClCompile Include="..\src\i386\ehprolg3a.cpp">
       <Filter>ucxxrt\i386</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\stl\cthread.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\thread0.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xlock.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xmtx.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\stl\syserror.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xonce.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xtime.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xnotify.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\mutex.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\cond.cpp">
       <Filter>ucxxrt\stl</Filter>
     </ClCompile>
     <ClCompile Include="..\src\vcruntime\thread.cpp">
       <Filter>ucxxrt\vcruntime</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\stl\sharedmutex.cpp">
+    <ClCompile Include="..\deps\STL\stl\src\cond.cpp">
+      <Filter>ucxxrt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\xtime.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\xmtx.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\xnotify.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\xonce.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\xthrow.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\future.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\cthread.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\excptptr.cpp">
+      <Filter>ucxxrt\stl\dirty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\mutex.cpp">
+      <Filter>ucxxrt\stl\dirty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\thread0.cpp">
+      <Filter>ucxxrt\stl\dirty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\stl\xlock.cpp">
+      <Filter>ucxxrt\stl\dirty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\syserror_import_lib.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\taskscheduler.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\pplerror.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\ppltasks.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\sharedmutex.cpp">
       <Filter>ucxxrt\stl</Filter>
     </ClCompile>
   </ItemGroup>
@@ -256,13 +277,13 @@
     <ClInclude Include="..\inc\new_user.h">
       <Filter>ucxxrt\inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\stl\xmtx.hpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\stl\awint.hpp">
-      <Filter>ucxxrt\stl</Filter>
+      <Filter>ucxxrt\stl\dirty</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\stl\primitives.hpp">
+    <ClInclude Include="..\src\stl\xmtx.hpp">
+      <Filter>ucxxrt\stl\dirty</Filter>
+    </ClInclude>
+    <ClInclude Include="..\deps\STL\stl\src\primitives.hpp">
       <Filter>ucxxrt\stl</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,11 +5,7 @@
 
 #include <system_error>
 
-#if _KERNEL_MODE
-#include <winerror.h>
-#else
 #include <Windows.h>
-#endif
 
 // TRANSITION, MSBuild
 // MSBuild has a hard requirement against including the same file in both a DLL and its import lib, so we include
@@ -210,16 +206,16 @@ _CRTIMP2_PURE int __CLRCALL_PURE_OR_CDECL _Winerror_map(int _Errcode) {
     return 0;
 }
 
-//// TRANSITION, ABI: _Winerror_message() is preserved for binary compatibility
-//_CRTIMP2_PURE unsigned long __CLRCALL_PURE_OR_CDECL _Winerror_message(
-//    unsigned long _Message_id, char* _Narrow, unsigned long _Size) {
-//    // convert to name of Windows error, return 0 for failure, otherwise return number of chars written
-//    // pre: _Size < INT_MAX
-//    const unsigned long _Chars = FormatMessageA(
-//        FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, _Message_id, 0, _Narrow, _Size, nullptr);
-//
-//    return static_cast<unsigned long>(_CSTD __std_get_string_size_without_trailing_whitespace(_Narrow, _Chars));
-//}
+// TRANSITION, ABI: _Winerror_message() is preserved for binary compatibility
+_CRTIMP2_PURE unsigned long __CLRCALL_PURE_OR_CDECL _Winerror_message(
+    unsigned long _Message_id, char* _Narrow, unsigned long _Size) {
+    // convert to name of Windows error, return 0 for failure, otherwise return number of chars written
+    // pre: _Size < INT_MAX
+    const unsigned long _Chars = FormatMessageA(
+        FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, _Message_id, 0, _Narrow, _Size, nullptr);
+
+    return static_cast<unsigned long>(_CSTD __std_get_string_size_without_trailing_whitespace(_Narrow, _Chars));
+}
 
 _CRTIMP2_PURE const char* __CLRCALL_PURE_OR_CDECL _Syserror_map(int _Errcode) { // convert to name of generic error
     for (const auto& _Entry : _Sys_errtab) {

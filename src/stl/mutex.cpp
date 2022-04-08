@@ -1,3 +1,7 @@
+//
+// :-(
+//
+
 // Copyright (c) Microsoft Corporation.
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
@@ -7,22 +11,28 @@
 #include <cstdlib>
 #include <internal_shared.h>
 #include <type_traits>
+#include <xthreads.h>
 
-#if _MSC_VER > 1916
-#include <xthreads.h>
-#include <xthreads.h>
-#else
-#include <thr/xthread>
-#include <thr/xtime>
+
+
+#if (_THREAD_CHECKX == 0) && defined(_THREAD_ASSERT)
+#undef _THREAD_ASSERT
 #endif
+
+#define fputs(msg, stream)	msg
+#define fputc(msg, stream)	msg
+
+
+
+#include <xtimec.h>
 
 #include "primitives.hpp"
 
-//extern "C" _CRTIMP2_PURE void _Thrd_abort(const char* msg) { // abort on precondition failure
-//    fputs(msg, stderr);
-//    fputc('\n', stderr);
-//    abort();
-//}
+extern "C" _CRTIMP2_PURE void _Thrd_abort(const char* msg) { // abort on precondition failure
+    fputs(msg, stderr);
+    fputc('\n', stderr);
+    abort();
+}
 
 #if defined(_THREAD_CHECK) || defined(_DEBUG)
 #define _THREAD_CHECKX 1
@@ -35,9 +45,7 @@
 #define _THREAD_QUOT(x)           _THREAD_QUOTX(x)
 #define _THREAD_ASSERT(expr, msg) ((expr) ? (void) 0 : _Thrd_abort(__FILE__ "(" _THREAD_QUOT(__LINE__) "): " msg))
 #else // _THREAD_CHECKX
-#ifndef _THREAD_ASSERT
 #define _THREAD_ASSERT(expr, msg) ((void) 0)
-#endif
 #endif // _THREAD_CHECKX
 
 __stl_sync_api_modes_enum __stl_sync_api_impl_mode = __stl_sync_api_modes_enum::normal;
@@ -64,8 +72,8 @@ static_assert(alignof(_Mtx_internal_imp_t) <= _Mtx_internal_imp_alignment, "inco
 void _Mtx_init_in_situ(_Mtx_t mtx, int type) { // initialize mutex in situ
     Concurrency::details::create_stl_critical_section(mtx->_get_cs());
     mtx->thread_id = -1;
-    mtx->type = type;
-    mtx->count = 0;
+    mtx->type      = type;
+    mtx->count     = 0;
 }
 
 void _Mtx_destroy_in_situ(_Mtx_t mtx) { // destroy mutex in situ
@@ -104,8 +112,7 @@ static int mtx_do_lock(_Mtx_t mtx, const xtime* target) { // lock mutex
         ++mtx->count;
 
         return _Thrd_success;
-    }
-    else { // handle timed or recursive mutex
+    } else { // handle timed or recursive mutex
         int res = WAIT_TIMEOUT;
         if (target == nullptr) { // no target --> plain wait (i.e. infinite timeout)
             if (mtx->thread_id != static_cast<long>(GetCurrentThreadId())) {
@@ -114,23 +121,19 @@ static int mtx_do_lock(_Mtx_t mtx, const xtime* target) { // lock mutex
 
             res = WAIT_OBJECT_0;
 
-        }
-        else if (target->sec < 0 || target->sec == 0 && target->nsec <= 0) {
+        } else if (target->sec < 0 || target->sec == 0 && target->nsec <= 0) {
             // target time <= 0 --> plain trylock or timed wait for time that has passed; try to lock with 0 timeout
             if (mtx->thread_id != static_cast<long>(GetCurrentThreadId())) { // not this thread, lock it
                 if (mtx->_get_cs()->try_lock()) {
                     res = WAIT_OBJECT_0;
-                }
-                else {
+                } else {
                     res = WAIT_TIMEOUT;
                 }
-            }
-            else {
+            } else {
                 res = WAIT_OBJECT_0;
             }
 
-        }
-        else { // check timeout
+        } else { // check timeout
             xtime now;
             xtime_get(&now, TIME_UTC);
             while (now.sec < target->sec || now.sec == target->sec && now.nsec < target->nsec) { // time has not expired
@@ -138,8 +141,7 @@ static int mtx_do_lock(_Mtx_t mtx, const xtime* target) { // lock mutex
                     || mtx->_get_cs()->try_lock_for(_Xtime_diff_to_millis2(target, &now))) { // stop waiting
                     res = WAIT_OBJECT_0;
                     break;
-                }
-                else {
+                } else {
                     res = WAIT_TIMEOUT;
                 }
 
@@ -152,8 +154,7 @@ static int mtx_do_lock(_Mtx_t mtx, const xtime* target) { // lock mutex
                     --mtx->count;
                     res = WAIT_TIMEOUT;
                 }
-            }
-            else {
+            } else {
                 mtx->thread_id = static_cast<long>(GetCurrentThreadId());
             }
         }
@@ -166,8 +167,7 @@ static int mtx_do_lock(_Mtx_t mtx, const xtime* target) { // lock mutex
         case WAIT_TIMEOUT:
             if (target == nullptr || (target->sec == 0 && target->nsec == 0)) {
                 return _Thrd_busy;
-            }
-            else {
+            } else {
                 return _Thrd_timedout;
             }
 
@@ -195,7 +195,7 @@ int _Mtx_lock(_Mtx_t mtx) { // lock mutex
 int _Mtx_trylock(_Mtx_t mtx) { // attempt to lock try_mutex
     xtime xt;
     _THREAD_ASSERT((mtx->type & (_Mtx_try | _Mtx_timed)) != 0, "trylock not supported by mutex");
-    xt.sec = 0;
+    xt.sec  = 0;
     xt.nsec = 0;
     return mtx_do_lock(mtx, &xt);
 }

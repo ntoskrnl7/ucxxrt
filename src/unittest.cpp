@@ -422,12 +422,15 @@ void Test$Future()
 	std::future<int> f3 = p.get_future();
 	std::thread([&p] { p.set_value_at_thread_exit(9); }).detach();
 
-	//d::cout << "Waiting..." << std::flush;
+    LOG(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, "Waiting...\n");
+
 	f1.wait();
 	f2.wait();
 	f3.wait();
-	// std::cout << "Done!\nResults are: "
-	//	<< f1.get() << ' ' << f2.get() << ' ' << f3.get() << '\n';
+
+    LOG(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL,
+        "Done!\nResults are: %d %d %d\n", f1.get(), f2.get(), f3.get());
+
 	t.join();
 }
 

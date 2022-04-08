@@ -193,12 +193,16 @@
     <ClCompile Include="..\deps\STL\stl\src\cthread.cpp">
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
-    <ClCompile Include="..\deps\STL\stl\src\xmtx.cpp" />
+    <ClCompile Include="..\deps\STL\stl\src\xmtx.cpp" Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)">
+      <ForcedIncludeFiles>$(SolutionDir)src\stl\xmtx.hpp;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\deps\STL\stl\src\xmtx.cpp" Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" />
     <ClCompile Include="..\deps\STL\stl\src\xtime.cpp">
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
 
     <ClInclude Include="..\deps\STL\stl\src\primitives.hpp" />
+    <ClInclude Include="..\deps\STL\stl\src\xmtx.hpp" Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" />
   </ItemGroup>
 
   <!-- STL (dirty) -->
@@ -217,9 +221,8 @@
     <ClCompile Include="..\src\stl\xlock.cpp">
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
-
     <ClInclude Include="..\src\stl\awint.hpp" />
-    <ClInclude Include="..\src\stl\xmtx.hpp" />
+    <ClInclude Include="..\src\stl\xmtx.hpp" Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" />
   </ItemGroup>
 
   <PropertyGroup Label="Globals">
@@ -275,11 +278,11 @@
 
   <!-- IncludePath -->
   <PropertyGroup Condition=" ('$(UCRT_KernelMode)'=='true') ">
-    <!-- <= 14.16.27023 -->
-    <IncludePath Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)">$(SolutionDir)\deps\ldk\include\ldk;$(SolutionDir)\deps\ldk\include;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath);$(SolutionDir)src\stl;$(SolutionDir)\deps\STL\stl\inc;$(SolutionDir)\deps\STL\stl\src</IncludePath>
-
     <!-- > 14.16.27023 -->
-    <IncludePath Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)">$(VC_VC_IncludePath.Substring(0,$([MSBuild]::Subtract($(VC_VC_IncludePath.Length()), 1))))\thr;$(SolutionDir)\deps\ldk\include\ldk;$(SolutionDir)\deps\ldk\include;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath);$(SolutionDir)src\stl;$(SolutionDir)\deps\STL\stl\inc;$(SolutionDir)\deps\STL\stl\src</IncludePath>
+    <IncludePath Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)">$(SolutionDir)\deps\ldk\include\ldk;$(SolutionDir)\deps\ldk\include;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath);$(SolutionDir)src\stl;$(SolutionDir)\deps\STL\stl\src;$(SolutionDir)\deps\STL\stl\inc</IncludePath>
+
+    <!-- <= 14.16.27023 -->
+    <IncludePath Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)">$(VC_VC_IncludePath.Substring(0,$([MSBuild]::Subtract($(VC_VC_IncludePath.Length()), 1))))\thr;$(SolutionDir)\deps\ldk\include\ldk;$(SolutionDir)\deps\ldk\include;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath);$(SolutionDir)src\stl;$(SolutionDir)\deps\STL\stl\src;$(SolutionDir)\deps\STL\stl\inc</IncludePath>
   </PropertyGroup>
 
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

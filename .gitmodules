@@ -1,3 +1,6 @@
 [submodule "deps/ldk"]
 	path = deps/ldk
 	url = https://github.com/ntoskrnl7/ldk
+[submodule "deps/STL"]
+	path = deps/STL
+	url = https://github.com/microsoft/STL.git

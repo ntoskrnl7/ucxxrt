@@ -283,6 +283,9 @@
     <ClInclude Include="..\src\stl\xmtx.hpp">
       <Filter>ucxxrt\stl\dirty</Filter>
     </ClInclude>
+    <ClInclude Include="..\deps\STL\stl\src\xmtx.hpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClInclude>
     <ClInclude Include="..\deps\STL\stl\src\primitives.hpp">
       <Filter>ucxxrt\stl</Filter>
     </ClInclude>

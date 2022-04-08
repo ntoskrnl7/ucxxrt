@@ -26,11 +26,10 @@
 #define _VCRTIMP _CRTIMP
 #endif
 
-
+#ifdef __cplusplus
 #include <cstdint>
 #include <inc/malloc.h>
 #include <inc/new_user.h>
-
 
 namespace ucxxrt
 {
@@ -46,7 +45,7 @@ namespace ucxxrt
     extern ULONG        DefaultMdlProtection;
 #endif
 }
-
+#endif // __cplusplus
 
 #ifndef _ByteSwap16
 #define _ByteSwap16(x) (                            \

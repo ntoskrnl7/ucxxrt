@@ -83,8 +83,6 @@
 #    endif
 #endif
 
-#include <cstddef>
-#include <cstdlib>
 #include <minwindef.h>
 
 #include "ucxxrt.h"

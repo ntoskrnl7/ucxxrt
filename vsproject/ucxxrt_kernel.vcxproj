@@ -166,32 +166,68 @@
   <!-- STL -->
   <ItemGroup>
     <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\future.cpp" />
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.cpp">
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.cpp">
       <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\pplerror.cpp" />
     <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\ppltasks.cpp" />
     <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\sharedmutex.cpp" />
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror_import_lib.cpp">
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror_import_lib.cpp">
     </ClCompile>
     <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\taskscheduler.cpp" />
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.cpp">
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.c">
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xonce.cpp" />
     <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xthrow.cpp" />
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.cpp">
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.cpp">
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.cpp" />
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.cpp">
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.cpp">
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
-    <ClInclude Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.hpp" />
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.hpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.h">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.hpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.h">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
     <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\excptptr.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.cpp">
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror.cpp">
@@ -200,7 +236,6 @@
     <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xlock.cpp">
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
-    <ClInclude Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8D969184-788F-48AA-BF18-2898FC167C91}</ProjectGuid>
@@ -246,15 +281,15 @@
     </ClCompile>
     <Lib>
       <AdditionalDependencies>ldk.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)deps\ldk\lib\$(PlatformShortName)\$(Configuration.ToLower());%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <!-- IncludePath -->
   <PropertyGroup Condition=" ('$(UCRT_KernelMode)'=='true') ">
     <!-- <= 14.16.27023 -->
-    <IncludePath Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)">$(SolutionDir)\deps\ldk\include\ldk;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath)</IncludePath>
+    <IncludePath Condition=" ($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0) ">$(SolutionDir)deps\ldk\include\ldk;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath)</IncludePath>
     <!-- > 14.16.27023 -->
-    <IncludePath Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)">$(VC_VC_IncludePath.Substring(0,$([MSBuild]::Subtract($(VC_VC_IncludePath.Length()), 1))))\thr;$(SolutionDir)\deps\ldk\include\ldk;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath)</IncludePath>
+    <IncludePath Condition=" ($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0) ">$(VC_CRT_SourcePath.Split(%3B)[0])\stl;$(VC_VC_IncludePath.Substring(0,$([MSBuild]::Subtract($(VC_VC_IncludePath.Length()), 1))))\thr;$(SolutionDir)src\stl;$(SolutionDir)deps\ldk\include\ldk;$(SolutionDir)deps\WindowsSDK\include\um;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

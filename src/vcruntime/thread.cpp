@@ -1,6 +1,6 @@
 #if _KERNEL_MODE
 
-#include <Ldk/windows.h>
+#include <windows.h>
 #include <process.h>
 
 _Success_(return != 0)

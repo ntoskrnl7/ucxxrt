@@ -14,9 +14,7 @@
 
 #include <vcstartup_internal.h>
 #include <vcruntime_internal.h>
-#include <process.h>
-
-#include <Ldk/ldk.h>
+#include <ldk.h>
 
 #ifdef _KERNEL_MODE
 

@@ -12,11 +12,8 @@
 #include <intrin.h>
 #include <process.h>
 #include <vcruntime_startup.h>
-#ifdef _KERNEL_MODE
-#include <Ldk/windows.h>
-#else
 #include <Windows.h>
-#endif
+
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //
 // EncodePointer and DecodePointer Redeclarations

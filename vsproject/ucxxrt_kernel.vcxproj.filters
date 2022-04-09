@@ -29,13 +29,13 @@
     <Filter Include="ucxxrt\misc">
       <UniqueIdentifier>{c467312d-b6bf-49e0-8c7f-357b501d87ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ucxxrt\stl">
+      <UniqueIdentifier>{922c4867-97c2-495f-b088-019c77652dc4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ucxxrt.cpp">
       <Filter>ucxxrt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xthrow.cpp">
-      <Filter>ucxxrt\stl</Filter>
     </ClCompile>
     <ClCompile Include="..\src\malloc.cpp">
       <Filter>ucxxrt</Filter>
@@ -175,53 +175,65 @@
     <ClCompile Include="..\src\i386\ehprolg3a.cpp">
       <Filter>ucxxrt\i386</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\stl\cthread.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\thread0.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xlock.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xmtx.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\syserror.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xonce.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xtime.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\xnotify.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\mutex.cpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\stl\cond.cpp">
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror.cpp">
       <Filter>ucxxrt\stl</Filter>
     </ClCompile>
     <ClCompile Include="..\src\vcruntime\thread.cpp">
       <Filter>ucxxrt\vcruntime</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\stl\sharedmutex.cpp">
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.c">
       <Filter>ucxxrt\stl</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\vcruntime\tlsdyn.cpp">
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.c">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.c">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.c">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.c">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xonce.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xthrow.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\future.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\excptptr.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\thread0.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xlock.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\taskscheduler.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\pplerror.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\ppltasks.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\sharedmutex.cpp">
+      <Filter>ucxxrt\stl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\vcruntime\locales.cpp">
       <Filter>ucxxrt\vcruntime</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\vcruntime\tlsdtor.cpp">
+    <ClCompile Include="..\src\vcruntime\crt.cpp">
       <Filter>ucxxrt\vcruntime</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\vcruntime\tlssup.cpp">
-      <Filter>ucxxrt\vcruntime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\vcruntime\dyn_tls_init.cpp">
-      <Filter>ucxxrt\vcruntime</Filter>
+    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.c">
+      <Filter>ucxxrt</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -268,14 +280,11 @@
     <ClInclude Include="..\inc\new_user.h">
       <Filter>ucxxrt\inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\stl\xmtx.hpp">
+    <ClInclude Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.h">
       <Filter>ucxxrt\stl</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\stl\awint.hpp">
-      <Filter>ucxxrt\stl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\stl\primitives.hpp">
-      <Filter>ucxxrt\stl</Filter>
+    <ClInclude Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.h">
+      <Filter>ucxxrt</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -400,20 +400,20 @@ void Test$SharedMutex() {
     thread2.join();
 }
 
-class TestClass {
+class ThreadLocalTestClass {
 public:
-    TestClass(int val) : val_(val) {
-        LOG(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, "TestClass::TestClass val_ =%d\n", val_);
+    ThreadLocalTestClass(int val) : val_(val) {
+        LOG(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, "ThreadLocalTestClass::ThreadLocalTestClass val_ =%d\n", val_);
     }
     
-    ~TestClass() {
-        LOG(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, "TestClass::~TestClass val_ =%d\n", val_);
+    ~ThreadLocalTestClass() {
+        LOG(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, "ThreadLocalTestClass::~ThreadLocalTestClass val_ =%d\n", val_);
     }
 private:
     int val_;
 };
 
-thread_local TestClass test_tls(100);
+thread_local ThreadLocalTestClass thread_local_test(100);
 
 #ifdef _KERNEL_MODE
 EXTERN_C NTSTATUS DriverMain(PDRIVER_OBJECT aDriverObject, PUNICODE_STRING /*aRegistry*/)

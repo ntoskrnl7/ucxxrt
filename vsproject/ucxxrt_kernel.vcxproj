@@ -163,80 +163,9 @@
     <ClInclude Include="..\src\vcruntime\trnsctrl.h" />
     <ClInclude Include="..\src\vcruntime\vcruntime_internal.h" />
   </ItemGroup>
-  <!-- STL -->
-  <ItemGroup>
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\future.cpp" />
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.c">
-      <CallingConvention>Cdecl</CallingConvention>
-      <CompileAs>CompileAsCpp</CompileAs>
-    </ClCompile>
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\pplerror.cpp" />
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\ppltasks.cpp" />
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\sharedmutex.cpp" />
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror_import_lib.cpp">
-    </ClCompile>
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\taskscheduler.cpp" />
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.c">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xonce.cpp" />
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xthrow.cpp" />
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.c">
-      <CallingConvention>Cdecl</CallingConvention>
-      <CompileAs>CompileAsCpp</CompileAs>
-    </ClCompile>
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.c">
-      <CallingConvention>Cdecl</CallingConvention>
-      <CompileAs>CompileAsCpp</CompileAs>
-    </ClCompile>
-    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.hpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClInclude>
-    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.h">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClInclude>
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.c">
-      <CallingConvention>Cdecl</CallingConvention>
-      <CompileAs>CompileAsCpp</CompileAs>
-    </ClCompile>
-    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.hpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClInclude>
-    <ClInclude Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.h">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClInclude>
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &gt; 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Condition="($([System.Convert]::ToDecimal($(VCToolsVersion.Replace('.',''))).CompareTo(141627023)) &lt;= 0)" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.c">
-      <CallingConvention>Cdecl</CallingConvention>
-      <CompileAs>CompileAsCpp</CompileAs>
-    </ClCompile>
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\excptptr.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror.cpp">
-    </ClCompile>
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\thread0.cpp" />
-    <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xlock.cpp">
-      <CallingConvention>Cdecl</CallingConvention>
-    </ClCompile>
-  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="..\stl.props" />
+  </ImportGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8D969184-788F-48AA-BF18-2898FC167C91}</ProjectGuid>
     <TemplateGuid>{0a049372-4c4d-4ea0-a64e-dc6ad88ceca1}</TemplateGuid>

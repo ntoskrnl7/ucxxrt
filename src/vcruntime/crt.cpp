@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <windows.h>
 
 EXTERN_C_START
 
@@ -9,8 +10,8 @@ _ACRTIMP int __cdecl fputs(
     _Inout_ FILE*       _Stream
     )
 {
-    UNREFERENCED_PARAMETER(_Buffer);
-    UNREFERENCED_PARAMETER(_Stream);
+    _Buffer;
+    _Stream;
 
     // TODO
 
@@ -24,20 +25,13 @@ _ACRTIMP int __cdecl fputc(
     _Inout_ FILE* _Stream
     )
 {
-    UNREFERENCED_PARAMETER(_Character);
-    UNREFERENCED_PARAMETER(_Stream);
+    _Character;
+    _Stream;
 
     // TODO
 
     return EOF;
 }
-EXTERN_C_END
-
-
-
-#include <windows.h>
-
-EXTERN_C_START
 
 BOOL __cdecl __crtQueueUserWorkItem(__in LPTHREAD_START_ROUTINE function, __in_opt PVOID context, __in ULONG flags)
 {

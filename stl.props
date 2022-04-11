@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <ItemGroup>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\future.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\future.cpp" />
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.c')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cond.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\pplerror.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\pplerror.cpp" />
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\ppltasks.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\ppltasks.cpp" />
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\sharedmutex.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\sharedmutex.cpp" />
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror_import_lib.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror_import_lib.cpp" />
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\taskscheduler.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\taskscheduler.cpp" />
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.c')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xnotify.c">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xonce.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xonce.cpp" />
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xthrow.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xthrow.cpp" />
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.c')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\cthread.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.c')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClInclude Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.hpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.hpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClInclude Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.h')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xmtx.h">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.c')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xtime.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClInclude Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.hpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.hpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClInclude Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.h')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\primitives.h">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClInclude>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.c')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.c">
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\excptptr.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\excptptr.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\syserror.cpp">
+    </ClCompile>
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\thread0.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\thread0.cpp" />
+    <ClCompile Condition="exists('$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xlock.cpp')" Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\xlock.cpp">
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+  </ItemGroup>
+</Project>

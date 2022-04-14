@@ -233,7 +233,7 @@
       <Filter>ucxxrt\vcruntime</Filter>
     </ClCompile>
     <ClCompile Include="$(VC_CRT_SourcePath.Split(%3B)[0])\stl\mutex.c">
-      <Filter>ucxxrt</Filter>
+      <Filter>ucxxrt\stl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

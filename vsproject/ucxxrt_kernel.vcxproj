@@ -137,7 +137,9 @@
     <ClCompile Include="..\src\vcruntime\new.cpp" />
     <ClCompile Include="..\src\vcruntime\pesect.cpp" />
     <ClCompile Include="..\src\vcruntime\pre_thread_data.cpp" />
-    <ClCompile Include="..\src\vcruntime\risctrnsctrl.cpp" />
+    <ClCompile Include="..\src\vcruntime\risctrnsctrl.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\src\vcruntime\std_exception.cpp" />
     <ClCompile Include="..\src\vcruntime\std_nothrow.cpp" />
     <ClCompile Include="..\src\vcruntime\std_type_info.cpp" />

@@ -19,7 +19,7 @@
 *
 *******************************************************************************/
 
-#if defined(_DEBUG) and defined(_KERNEL_MODE)
+#if defined(_DEBUG) && defined(_KERNEL_MODE)
 
 _CRT_BEGIN_C_HEADER
 

@@ -44,11 +44,9 @@ ucxxrt 是一个基于微软的 MSVC 修改的开源运行时库，最大的亮�
   * [ ] ...
 * [x] 支持 静态对象
 
-[暂不支持的特性列表↓](#5-暂不支持的特性列表)
-
 ### 1.3 例子
 
-> 项目 [unittest](https://github.com/MiroKaku/ucxxrt/blob/master/src/unittest.cpp) 查看更多信息。
+> 项目 [unittest](src/unittest.cpp) 查看更多信息。
 
 ```cpp
 void Test$ThrowUnknow()

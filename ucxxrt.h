@@ -33,7 +33,7 @@
 
 namespace ucxxrt
 {
-#if (_MSVC_LANG < 201704L) && (__cplusplus < 201704L)
+#if (_MSVC_LANG <= 201704L) && (__cplusplus <= 201704L)
     constexpr char    __Version[] = u8"2.0.0.40";
 #else
     constexpr char8_t __Version[] = u8"2.0.0.40";

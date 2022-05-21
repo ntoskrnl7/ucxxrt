@@ -209,7 +209,13 @@ void* __cdecl _calloc_base(
     // Ensure that (count * size) does not overflow
     _VALIDATE_RETURN_NOEXC(count == 0 || (_HEAP_MAXREQ / count) >= size, ENOMEM, nullptr);
 
-    return malloc(count * size);
+    void* p = malloc(count * size);
+    if (p)
+    {
+        RtlZeroMemory( p, count * size );
+        return p;
+    }
+    return NULL;
 }
 
 __declspec(noinline) _CRTRESTRICT _CRT_HYBRIDPATCHABLE
@@ -267,6 +273,7 @@ void* __cdecl _realloc_base(
         void* const new_block = ExAllocatePoolWithTag(ucxxrt::DefaultPoolType, size, ucxxrt::DefaultPoolTag);
         if (new_block)
         {
+            RtlZeroMemory(new_block, size);
             memmove(new_block, block, _msize_base(block));
             return new_block;
         }

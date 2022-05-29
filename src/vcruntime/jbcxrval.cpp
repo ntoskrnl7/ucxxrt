@@ -49,7 +49,7 @@ void __GetStackLimits(PULONG_PTR LowLimit, PULONG_PTR HighLimit)
 
 
 // Using libcntpr.lib on X86 KernelMode
-#if defined(_AMD64_) || !defined(_KERNEL_MODE)
+#if !defined(_X86_) || !defined(_KERNEL_MODE)
 
 
 #include "misc\cfg_support.inc"  // To inline _guard_icall_checks_enforced()

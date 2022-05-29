@@ -395,6 +395,7 @@ typedef struct _xDISPATCHER_CONTEXT {
 
 #define UNWIND_HISTORY_TABLE_SIZE 12
 
+#ifndef _WINNT_
 typedef struct _UNWIND_HISTORY_TABLE_ENTRY {
     DWORD ImageBase;
     PIMAGE_RUNTIME_FUNCTION_ENTRY FunctionEntry;
@@ -505,6 +506,7 @@ typedef struct _KNONVOLATILE_CONTEXT_POINTERS {
 
 } KNONVOLATILE_CONTEXT_POINTERS, * PKNONVOLATILE_CONTEXT_POINTERS;
 
+#endif
 
 //
 // On ARM we don't have a registration node, just a pointer to the stack frame base
@@ -645,6 +647,7 @@ typedef struct _xDISPATCHER_CONTEXT {
 
 #define UNWIND_HISTORY_TABLE_SIZE 12
 
+#ifndef _WINNT_
 typedef struct _UNWIND_HISTORY_TABLE_ENTRY {
     DWORD64 ImageBase;
     PIMAGE_RUNTIME_FUNCTION_ENTRY FunctionEntry;
@@ -767,6 +770,7 @@ typedef struct _KNONVOLATILE_CONTEXT_POINTERS_ARM64 {
 } KNONVOLATILE_CONTEXT_POINTERS_ARM64, * PKNONVOLATILE_CONTEXT_POINTERS_ARM64;
 
 typedef KNONVOLATILE_CONTEXT_POINTERS_ARM64 KNONVOLATILE_CONTEXT_POINTERS, * PKNONVOLATILE_CONTEXT_POINTERS;
+#endif
 
 //
 // On ARM64 we don't have a registration node, just a pointer to the stack frame base
